@@ -4,7 +4,6 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 import Route from '@ioc:Adonis/Core/Route'
 import Env from '@ioc:Adonis/Core/Env'
-import { Request } from '@adonisjs/core/build/standalone'
 export default class UsersController {
 
   public async index({ auth }: HttpContextContract) {
