@@ -27,6 +27,7 @@ Route.get('/', async () => {
 Route.group(() => {
   Route.get('/', 'UsersController.index').middleware(['auth', 'active'])
   Route.post('/', 'UsersController.store')
+  Route.get('/activate/:user', 'UsersController.activate').as('activate')
   Route.post('/login', 'UsersController.login')
   Route.put('/', 'UsersController.update').middleware('auth')
   Route.delete('/', 'UsersController.destroy').middleware('auth')

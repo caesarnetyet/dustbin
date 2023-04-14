@@ -1,6 +1,10 @@
+import Mail from '@ioc:Adonis/Addons/Mail'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
+import Route from '@ioc:Adonis/Core/Route'
+import Env from '@ioc:Adonis/Core/Env'
+import { Request } from '@adonisjs/core/build/standalone'
 export default class UsersController {
 
   public async index({ auth }: HttpContextContract) {
@@ -22,8 +26,32 @@ export default class UsersController {
     payload['roleId'] = 3
     const user = await User.create(payload)
 
+    const signedUrl = Route.makeSignedUrl('activate', {
+      user: user.id,
+    }, {
+      expiresIn: '1 day',
+    })
+    const url = `${Env.get('FRONTEND_URL')}/activate?signedUrl=${signedUrl}`
+    await Mail.sendLater(message => {
+      message
+        .from('caesarnetyet@gmail.com')
+        .to(user.email)
+        .subject('verify your email to activate your account')
+        .htmlView('email/register', { user, signedUrl, url })
+    })
+
     const { token } = await auth.use('api').generate(user)
     return { user, token }
+  }
+
+  public async activate({ params, response, request }: HttpContextContract) {
+    if (!request.hasValidSignature()) {
+      return response.badRequest({ message: 'Invalid or expired url' })
+    }
+    const user = await User.findOrFail(params.user)
+    user.is_active = true
+    await user.save()
+    return response.ok({ message: 'Cuenta activada satistactoriamente' })
   }
 
   public async login({ request, auth }: HttpContextContract) {
