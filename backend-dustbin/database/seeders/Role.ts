@@ -6,7 +6,6 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     const roles = [
       { name: 'admin' },
-      { name: 'employee' },
       { name: 'user' }
     ]
     await Role.createMany(roles)

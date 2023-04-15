@@ -22,7 +22,7 @@ export default class UsersController {
       phone: schema.string(),
     })
     const payload = await request.validate({ schema: storeSchema })
-    payload['roleId'] = 3
+    payload['roleId'] = 2
     const user = await User.create(payload)
 
     const signedUrl = Route.makeSignedUrl('activate', {
