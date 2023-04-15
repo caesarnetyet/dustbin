@@ -3,17 +3,11 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: dustbid
+      MYSQL_DATABASE: dustbin
     ports:
       - "3310:3306"
-    volumes:
-      - ./mysql:/var/lib/mysql
-    restart: always
 
   redis:
     image: redis:bullseye
     ports:
       - "6379:6379"
-    volumes:
-      - ./redis:/data
-    restart: always
