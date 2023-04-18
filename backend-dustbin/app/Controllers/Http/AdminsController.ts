@@ -1,13 +1,18 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class AdminsController {
   public async createUser({ request }: HttpContextContract) {
     const newUserSchema = schema.create({
       name: schema.string(),
-      email: schema.string(),
-      password: schema.string(),
+      email: schema.string({}, [
+        rules.email(),
+        rules.unique({ table: 'users', column: 'email' }),
+      ]),
+      password: schema.string({}, [
+        rules.confirmed(),
+      ]),
       phone: schema.string(),
     })
     const payload = await request.validate({ schema: newUserSchema })
