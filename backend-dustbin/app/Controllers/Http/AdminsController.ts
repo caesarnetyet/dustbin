@@ -10,9 +10,7 @@ export default class AdminsController {
         rules.email(),
         rules.unique({ table: 'users', column: 'email' }),
       ]),
-      password: schema.string({}, [
-        rules.confirmed(),
-      ]),
+      password: schema.string(),
       phone: schema.string(),
     })
     const payload = await request.validate({ schema: newUserSchema })
@@ -42,9 +40,7 @@ export default class AdminsController {
         rules.email(),
         rules.unique({ table: 'users', column: 'email' }),
       ]),
-      password: schema.string({}, [
-        rules.confirmed(),
-      ]),
+      password: schema.string(),
       phone: schema.string(),
     })
     const payload = await request.validate({ schema: updateUserSchema })

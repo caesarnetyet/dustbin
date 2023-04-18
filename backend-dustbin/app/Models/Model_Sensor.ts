@@ -10,7 +10,7 @@ export default class Model_User extends BaseModel {
   public model_id: number
 
   @column()
-  public user_id: number
+  public sensor_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
