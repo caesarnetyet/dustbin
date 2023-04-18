@@ -34,8 +34,15 @@ Route.group(() => {
 }).prefix('user')
 
 Route.group(() => {
-  Route.post('/save', 'SensorsController.saveSensor')
-  Route.get('/get', 'SensorsController.getSensors')
+  Route.post('/create', 'SensorsController.saveSensor')
+  Route.get('/getAll', 'SensorsController.getSensors')
   Route.put('/update/:id', 'SensorsController.updateSensor')
   Route.delete('/delete/:id', 'SensorsController.deleteSensor')
 }).prefix('sensor')
+
+Route.group(() => {
+  Route.post('/create', 'AdminsController.createUser')
+  Route.get('/getAll', 'AdminsController.getUsers')
+  Route.put('/update/:id', 'AdminsController.updateUser')
+  Route.delete('/delete/:id', 'AdminsController.deleteUser')
+}).prefix('user')
