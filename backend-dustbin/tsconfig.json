@@ -28,7 +28,12 @@
     "types": [
       "@adonisjs/core",
       "@adonisjs/repl",
-      "@japa/preset-adonis/build/adonis-typings"
+      "@japa/preset-adonis/build/adonis-typings",
+      "@adonisjs/redis",
+      "@adonisjs/lucid",
+      "@adonisjs/auth",
+      "@adonisjs/mail",
+      "@adonisjs/view"
     ]
   }
 }

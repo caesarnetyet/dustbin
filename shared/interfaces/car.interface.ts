@@ -10,7 +10,7 @@ export interface Model {
     id: number;
     name: string;
     sensors: Sensor[];
-
+    price: number;
 }
 
 export interface Sensor {

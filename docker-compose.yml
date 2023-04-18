@@ -1,0 +1,56 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: dustbin
+    ports:
+      - "3310:3306"
+
+  redis:
+    image: redis:bullseye
+    ports:
+      - "6379:6379"
+
+  mongo-rs0-1:
+    image: mongo
+    command: mongod --replSet rs0 --bind_ip_all
+    volumes:
+      - mongo-rs0-1-data:/data/db
+    networks:
+      - mongo-rs0-network
+  mongo-rs0-2:
+    image: mongo
+    command: mongod --replSet rs0 --bind_ip_all
+    volumes:
+      - mongo-rs0-2-data:/data/db
+    networks:
+      - mongo-rs0-network
+  mongo-rs0-3:
+    image: mongo
+    command: mongod --replSet rs0 --bind_ip_all
+    volumes:
+      - mongo-rs0-3-data:/data/db
+    networks:
+      - mongo-rs0-network
+  mongo-init-replica:
+    image: mongo
+    command: >
+      mongosh --host mongo-rs0-1:27017 --eval "rs.initiate({_id: 'rs0', members: [
+        { _id: 0, host: 'mongo-rs0-1:27017' },
+        { _id: 1, host: 'mongo-rs0-2:27017' },
+        { _id: 2, host: 'mongo-rs0-3:27017' }
+      ]})"
+    depends_on:
+      - mongo-rs0-1
+      - mongo-rs0-2
+      - mongo-rs0-3
+    networks:
+      - mongo-rs0-network
+
+networks:
+  mongo-rs0-network:
+volumes:
+  mongo-rs0-1-data:
+  mongo-rs0-2-data:
+  mongo-rs0-3-data:
