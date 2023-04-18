@@ -32,3 +32,10 @@ Route.group(() => {
   Route.put('/', 'UsersController.update').middleware('auth')
   Route.delete('/', 'UsersController.destroy').middleware('auth')
 }).prefix('user')
+
+Route.group(() => {
+  Route.post('/save', 'SensorsController.saveSensor')
+  Route.get('/get', 'SensorsController.getSensors')
+  Route.put('/update/:id', 'SensorsController.updateSensor')
+  Route.delete('/delete/:id', 'SensorsController.deleteSensor')
+}).prefix('sensor')

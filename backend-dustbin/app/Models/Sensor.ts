@@ -12,9 +12,6 @@ export default class Sensor extends BaseModel {
   public type: string
 
   @column()
-  public value: number
-
-  @column()
   public description: string
 
   @column()
