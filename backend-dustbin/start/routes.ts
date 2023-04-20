@@ -69,4 +69,5 @@ Route.group(() => {
   Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor')
 }).prefix('modelSensors')
 
-Route.get('/mongo', 'MongoController.getSensors')
+Route.get('/mongo/sensors', 'MongoController.getSensors')
+Route.get('/mongo/details', 'MongoController.getDetails')
