@@ -90,9 +90,9 @@ export default class UsersController {
     return { message: 'User deleted successfully' }
   }
 
-  public async getDustbins({auth}){
+  public async getDustbins({ auth }) {
     const user = await auth.authenticate()
-   const query = await Database.query().from('dustbins').where('user_id', user.id)
+    const query = await Database.query().from('dustbins').where('user_id', user.id)
     return query
   }
 }

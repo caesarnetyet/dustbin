@@ -2,7 +2,6 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Model from 'App/Models/Model'
-import { model } from 'mongoose'
 import Model_Sensor from 'App/Models/Model_Sensor'
 import Sensor from 'App/Models/Sensor'
 
