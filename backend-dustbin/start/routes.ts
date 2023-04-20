@@ -43,6 +43,7 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/create', 'AdminsController.createUser')
   Route.get('/getAll', 'AdminsController.getUsers')
+  Route.get('/getDustbins', 'UsersController.getDustbins')
   Route.put('/update/:id', 'AdminsController.updateUser')
   Route.delete('/delete/:id', 'AdminsController.deleteUser')
 }).prefix('user')

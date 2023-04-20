@@ -4,6 +4,7 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 import Route from '@ioc:Adonis/Core/Route'
 import Env from '@ioc:Adonis/Core/Env'
+import Database from '@ioc:Adonis/Lucid/Database'
 export default class UsersController {
 
   public async index({ auth }: HttpContextContract) {
@@ -30,16 +31,17 @@ export default class UsersController {
     }, {
       expiresIn: '1 day',
     })
+    const { token } = await auth.use('api').generate(user)
     const url = `${Env.get('FRONTEND_URL')}/activate?signedUrl=${signedUrl}`
-    await Mail.sendLater(message => {
+    await Mail.send(message => {
       message
-        .from('caesarnetyet@gmail.com')
+        .from('abelardoreyes256@gmail.com')
         .to(user.email)
         .subject('verify your email to activate your account')
         .htmlView('email/register', { user, signedUrl, url })
     })
 
-    const { token } = await auth.use('api').generate(user)
+
     return { user, token }
   }
 
@@ -88,4 +90,9 @@ export default class UsersController {
     return { message: 'User deleted successfully' }
   }
 
+  public async getDustbins({auth}){
+    const user = await auth.authenticate()
+   const query = await Database.query().from('dustbins').where('user_id', user.id)
+    return query
+  }
 }
