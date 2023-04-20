@@ -5,6 +5,8 @@ import { MenuAdminComponent } from './Admin/menu-admin/menu-admin.component';
 import { LoginComponent } from './session/features/login/login.component';
 import { RegisterComponent } from './session/features/register/register.component';
 import { MenuComponent } from './session/features/menu/menu.component';
+import { EmailComponent } from './session/features/email/email.component';
+import { NotFoundComponent } from './session/features/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,11 @@ const routes: Routes = [
   { path: 'aMenu', component: MenuAdminComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'menu', component: MenuComponent },
+  { path: 'email', component: EmailComponent },
+
+  { path:'notfound', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 
 ];
 

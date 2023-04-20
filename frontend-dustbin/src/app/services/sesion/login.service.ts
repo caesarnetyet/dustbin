@@ -25,6 +25,7 @@ export class LoginService {
         catchError(this.handleError)
       );
   }
+  
 
   private handleError(error: HttpErrorResponse) {
     console.log(error); // Agregado para imprimir el error en la consola
