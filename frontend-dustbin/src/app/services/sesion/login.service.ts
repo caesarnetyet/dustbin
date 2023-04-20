@@ -5,6 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { API_URL } from '../../env';
 import { User } from '../../models/usuario.interface';
+import { Login } from 'src/app/models/login.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import { User } from '../../models/usuario.interface';
 export class LoginService {
   private _refresh$ = new Subject<void>();
   private registerUserUrl = API_URL + '/user';
+  private loginUrl = API_URL + 'user/login';
+  private logoutUrl = API_URL + '/logout';
 
   constructor(private http: HttpClient) { }
   get_refresh$() {
@@ -25,7 +28,7 @@ export class LoginService {
         catchError(this.handleError)
       );
   }
-  
+
 
   private handleError(error: HttpErrorResponse) {
     console.log(error); // Agregado para imprimir el error en la consola
@@ -40,5 +43,20 @@ export class LoginService {
     }
     // Devuelve un observable con un mensaje de error
     return throwError('Algo salió mal; por favor inténtelo de nuevo más tarde.');
+  }
+  login(login:Login): Observable<any> {
+    
+    return this.http.post(`${this.loginUrl}`, login);
+  };
+  
+
+  logout() {
+    this.http.post(`${this.logoutUrl}`, {});
+    localStorage.removeItem('token');
+
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
   }
 }

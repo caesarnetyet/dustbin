@@ -8,24 +8,23 @@
       <div class="col-sm-6 text-black">
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4  pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style="width: 23rem;">
-
-            <h3 class=" mb-3 pb-3 font-weight-bold" style="letter-spacing: 1px;">Sign in</h3>
-
-            <div class="form-outline mb-4">
-              <input type="email" id="form2Example18" class="form-control form-control-lg" />
-              <label class="form-label" for="email" name="email" id="email">Email address</label>
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email" class="sr-only">Email</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="email"
+                required email>
+              
             </div>
-
-            <div class="form-outline mb-4">
-              <input type="password" id="password" class="form-control form-control-lg" />
-              <label class="form-label" for="password" id="password" name="email">Password</label>
+            <div class="form-group mb-3">
+              <label for="password" class="sr-only">Password</label>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Password"
+                [(ngModel)]="password" >
+             
             </div>
-
-            <div class="pt-1 mb-4">
-              <button class="btn btn-warning btn-lg btn-block" type="button">Login</button>
+            <div class="d-flex justify-content-between align-items-center mb-5">
+              <button type="submit" class="btn login-btn" [disabled]="!loginForm?.valid">Login</button>
             </div>
-
+          
             <p>Don't have an account? <a href="/register" class="link-info">Register here</a></p>
 
           </form>
