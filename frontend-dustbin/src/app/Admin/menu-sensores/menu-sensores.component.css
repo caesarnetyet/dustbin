@@ -60,3 +60,7 @@
   .btn {
     padding: .55rem 1.5rem .45rem;
   }  
+  
+  .navbar-light {
+    color: black;
+  }

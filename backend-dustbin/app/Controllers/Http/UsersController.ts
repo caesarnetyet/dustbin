@@ -95,4 +95,9 @@ export default class UsersController {
     const query = await Database.query().from('dustbins').where('user_id', user.id)
     return query
   }
+
+  public async logout({ auth }: HttpContextContract) {
+    await auth.logout()
+    return { message: 'User logged out successfully' }
+  }
 }
