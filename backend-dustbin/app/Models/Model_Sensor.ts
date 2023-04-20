@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Model_User extends BaseModel {
+export default class Model_Sensor extends BaseModel {
 
   @column({ isPrimary: true })
   public id: number
@@ -10,7 +10,7 @@ export default class Model_User extends BaseModel {
   public model_id: number
 
   @column()
-  public user_id: number
+  public sensor_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

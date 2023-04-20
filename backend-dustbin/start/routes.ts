@@ -43,6 +43,32 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/create', 'AdminsController.createUser')
   Route.get('/getAll', 'AdminsController.getUsers')
+  Route.get('/getDustbins', 'UsersController.getDustbins')
   Route.put('/update/:id', 'AdminsController.updateUser')
   Route.delete('/delete/:id', 'AdminsController.deleteUser')
 }).prefix('user')
+
+Route.group(() => {
+  Route.post('/create', 'ModelController.createModel')
+  Route.get('/getAll', 'ModelController.getModels')
+  Route.put('/update/:id', 'ModelController.updateModel')
+  Route.delete('/delete/:id', 'ModelController.deleteModel')
+}).prefix('model')
+
+Route.group(() => {
+  Route.post('/create', 'DustbinController.createDustbin')
+  Route.get('/getAll', 'DustbinController.getDustbins')
+  Route.put('/update/:id', 'DustbinController.updateDustbin')
+  Route.delete('/delete/:id', 'DustbinController.deleteDustbin')
+}).prefix('dustbin')
+
+
+Route.group(() => {
+  Route.post('/create', 'ModelSensorController.createModelSensor')
+  Route.get('/getAll', 'ModelSensorController.getModelSensors')
+  Route.put('/update/:id', 'ModelSensorController.updateModelSensor')
+  Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor')
+}).prefix('modelSensors')
+
+Route.get('/mongo/sensors', 'MongoController.getSensors')
+Route.get('/mongo/details', 'MongoController.getDetails')
