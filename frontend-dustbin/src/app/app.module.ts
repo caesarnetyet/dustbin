@@ -10,6 +10,8 @@ import { MenuComponent } from './session/features/menu/menu.component';
 import { MenuAdminComponent } from './Admin/menu-admin/menu-admin.component';
 import { MenuSensoresComponent } from './Admin/menu-sensores/menu-sensores.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailComponent } from './session/features/email/email.component';
+import { NotFoundComponent } from './session/features/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     MenuComponent,
     MenuAdminComponent,
-    MenuSensoresComponent
+    MenuSensoresComponent,
+    EmailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
