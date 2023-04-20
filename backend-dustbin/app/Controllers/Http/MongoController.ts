@@ -11,11 +11,9 @@ export default class MongoController {
       sensorChangeStream.on('change', (change) => {
         console.log(change);
       });
-      Ws.io.emit('sensor', JSON.stringify({ data: await SensorModel.findOne({}).sort({ _id: -1 }) }));
-      const result = await SensorModel.findOne({}).sort({ _id: -1 });
-      console.log(result);
+      Ws.io.emit('sensor', JSON.stringify({ data: [await SensorModel.findOne({}).sort({ _id: -1 })] }));
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      return { data: result };
+      return [await SensorModel.findOne({}).sort({ _id: -1 })];
     } catch (error) {
       console.log(error);
       return { message: 'Error' };
@@ -29,11 +27,9 @@ export default class MongoController {
       detailsChangeStream.on('change', (change) => {
         console.log(change);
       });
-      Ws.io.emit('details', JSON.stringify({ data: await DetailsModel.findOne({}).sort({ _id: -1 }) }));
-      const result = await DetailsModel.findOne({}).sort({ _id: -1 });
-      console.log(result);
+      Ws.io.emit('details', JSON.stringify({ data: [await DetailsModel.findOne({}).sort({ _id: -1 })] }));
+      return [await DetailsModel.findOne({}).sort({ _id: -1 })];
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      return { data: result };
     } catch (error) {
       console.log(error);
       return { message: 'Error' };
