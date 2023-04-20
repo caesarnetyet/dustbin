@@ -34,40 +34,41 @@ Route.group(() => {
 }).prefix('user')
 
 Route.group(() => {
-  Route.post('/create', 'SensorsController.saveSensor')
-  Route.get('/getAll', 'SensorsController.getSensors')
-  Route.put('/update/:id', 'SensorsController.updateSensor')
-  Route.delete('/delete/:id', 'SensorsController.deleteSensor')
+  Route.post('/create', 'SensorsController.saveSensor').middleware('auth')
+  Route.get('/getAll', 'SensorsController.getSensors').middleware('auth')
+  Route.put('/update/:id', 'SensorsController.updateSensor').middleware('auth')
+  Route.delete('/delete/:id', 'SensorsController.deleteSensor').middleware('auth')
 }).prefix('sensor')
 
 Route.group(() => {
-  Route.post('/create', 'AdminsController.createUser')
-  Route.get('/getAll', 'AdminsController.getUsers')
-  Route.get('/getDustbins', 'UsersController.getDustbins')
-  Route.put('/update/:id', 'AdminsController.updateUser')
-  Route.delete('/delete/:id', 'AdminsController.deleteUser')
+  Route.post('/create', 'AdminsController.createUser').middleware('auth')
+  Route.get('/getAll', 'AdminsController.getUsers').middleware('auth')
+  Route.get('/getDustbins', 'UsersController.getDustbins').middleware('auth')
+  Route.put('/update/:id', 'AdminsController.updateUser').middleware('auth')
+  Route.delete('/delete/:id', 'AdminsController.deleteUser').middleware('auth')
 }).prefix('user')
 
 Route.group(() => {
-  Route.post('/create', 'ModelController.createModel')
-  Route.get('/getAll', 'ModelController.getModels')
-  Route.put('/update/:id', 'ModelController.updateModel')
-  Route.delete('/delete/:id', 'ModelController.deleteModel')
+  Route.post('/create', 'ModelController.createModel').middleware('auth')
+  Route.get('/getAll', 'ModelController.getModels').middleware('auth')
+  Route.get('/getModelSensor', 'ModelController.getModelSensors').middleware('auth')
+  Route.put('/update/:id', 'ModelController.updateModel').middleware('auth')
+  Route.delete('/delete/:id', 'ModelController.deleteModel').middleware('auth')
 }).prefix('model')
 
 Route.group(() => {
-  Route.post('/create', 'DustbinController.createDustbin')
-  Route.get('/getAll', 'DustbinController.getDustbins')
-  Route.put('/update/:id', 'DustbinController.updateDustbin')
-  Route.delete('/delete/:id', 'DustbinController.deleteDustbin')
+  Route.post('/create', 'DustbinController.createDustbin').middleware('auth')
+  Route.get('/getAll', 'DustbinController.getDustbins').middleware('auth')
+  Route.put('/update/:id', 'DustbinController.updateDustbin').middleware('auth')
+  Route.delete('/delete/:id', 'DustbinController.deleteDustbin').middleware('auth')
 }).prefix('dustbin')
 
 
 Route.group(() => {
-  Route.post('/create', 'ModelSensorController.createModelSensor')
-  Route.get('/getAll', 'ModelSensorController.getModelSensors')
-  Route.put('/update/:id', 'ModelSensorController.updateModelSensor')
-  Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor')
+  Route.post('/create', 'ModelSensorController.createModelSensor').middleware('auth')
+  Route.get('/getAll', 'ModelSensorController.getModelSensors').middleware('auth')
+  Route.put('/update/:id', 'ModelSensorController.updateModelSensor').middleware('auth')
+  Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor').middleware('auth')
 }).prefix('modelSensors')
 
 Route.get('/mongo/sensors', 'MongoController.getSensors')

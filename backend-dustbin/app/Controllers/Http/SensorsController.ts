@@ -9,7 +9,6 @@ export default class SensorsController {
       name: schema.string(),
       type: schema.string(),
       description: schema.string(),
-      model_id: schema.number(),
     })
     const payload = await request.validate({ schema: newSensorSchema })
 
@@ -20,12 +19,11 @@ export default class SensorsController {
     sensor.name = payload.name
     sensor.type = payload.type
     sensor.description = payload.description
-    sensor.model_id = payload.model_id
     await sensor.save()
     return sensor
   }
 
-  public async getSensors({ request }: HttpContextContract) {
+  public async getSensors({  }: HttpContextContract) {
     const sensors = await Sensor.all()
     return sensors
   }
@@ -35,7 +33,6 @@ export default class SensorsController {
       name: schema.string(),
       type: schema.string(),
       description: schema.string(),
-      model_id: schema.number(),
     })
     const payload = await request.validate({ schema: updateSensorSchema })
 
@@ -50,7 +47,6 @@ export default class SensorsController {
     findSensor.name = payload.name
     findSensor.type = payload.type
     findSensor.description = payload.description
-    findSensor.model_id = payload.model_id
     await findSensor.save()
     return findSensor
   }
