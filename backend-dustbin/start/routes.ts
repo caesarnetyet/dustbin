@@ -68,3 +68,5 @@ Route.group(() => {
   Route.put('/update/:id', 'ModelSensorController.updateModelSensor')
   Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor')
 }).prefix('modelSensors')
+
+Route.get('/mongo', 'MongoController.getSensors')
