@@ -17,13 +17,12 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef) { }
-  socket = io("192.168.117.27:3333");
+  socket = io("192.168.119.26:3333");
 
   ngOnInit() {
     // this.createChart();
     // this.listenForChartData();
     // console.log(this.chartCanvas.nativeElement);
-    this.helloSocket();
   }
 
   createChart() {
@@ -83,12 +82,5 @@ export class MenuSensoresComponent {
   }
 
 
-  helloSocket() {
-    this.socket.on('connect', () => {
-      console.log(this.socket.id);
-    });
-    this.socket.on('Humo', (data: any) => {
-      console.log(data);
-    });
-  }
+
 }
