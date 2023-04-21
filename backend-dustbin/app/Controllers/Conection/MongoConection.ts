@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 const uri = "mongodb+srv://admin:admin@cluster0.urq1yx8.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(uri);
+import Ws from "App/Services/Ws";
 
 export async function runMongo() {
   try {
@@ -14,7 +15,7 @@ export async function runMongo() {
       if(change.operationType === "insert"){
         const document = [change.fullDocument];
         console.log(document);
-        return document;
+        Ws.io.emit(document[0].tipo, document[0]);
       }
     }
     );
