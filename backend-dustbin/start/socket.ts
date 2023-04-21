@@ -1,12 +1,17 @@
 import Ws from 'App/Services/Ws'
+import { runMongo } from 'App/Controllers/Conection/MongoConection'
+
 Ws.boot()
 
 /**
  * Listen for incoming socket connections
  */
 Ws.io.on('connection', (socket) => {
+  runMongo()
+
   socket.emit('news', { hello: 'world' })
   console.log('a user connected')
+  console.log(socket.id)
 
   socket.on('joystick', (data) => {
     console.log(data)
@@ -18,3 +23,5 @@ Ws.io.on('connection', (socket) => {
     socket.broadcast.emit('pong', data)
   })
 })
+
+

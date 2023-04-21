@@ -12,6 +12,8 @@ import { MenuSensoresComponent } from './Admin/menu-sensores/menu-sensores.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
+import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
+import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NotFoundComponent } from './session/features/not-found/not-found.compon
     MenuAdminComponent,
     MenuSensoresComponent,
     EmailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MenuClientsComponent,
+    MenuDustbinsComponent
   ],
   imports: [
     BrowserModule,

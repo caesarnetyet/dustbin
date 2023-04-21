@@ -1,0 +1,143 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a routerLink="/aMenu"><img src="assets/images/trashcar1.png" alt="logo" width="100px" height="70px"></a>
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars text-light"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/cMenu">
+                        <div>
+                            <i class="fas fa-user"></i>  
+                        </div>
+
+                        Clients
+                    </a>
+                </li>
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/sMenu">
+                        <div>
+                            <i class="fas fa-microchip"></i> 
+                        </div>
+                        Sensors
+                    </a>
+                </li>
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/dMenu">
+                        <div>
+                            <i class="fas fa-truck"></i> 
+                        </div>
+                        Dustbins
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
+            <button class="btn btn-success" type="button" data-mdb-ripple-color="dark">cerrar Sesion </button>
+        </form>
+
+    </div>
+</nav>
+<br>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col-8">
+            <br>
+            <h1><b>Clients</b></h1>
+            <hr>
+            <br>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Phone</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let car of cars  ">
+                            <th scope="row">{{ car.id }}</th>
+                            <td>{{ car.brand }}</td>
+                            <td>{{ car.model }}</td>
+                            <td>{{ car.color }}</td>
+                            <td>{{ car.year }}</td> -->
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+
+
+
+                        <td><button type="button" class="btn btn-primary">Editar</button>
+                            <!-- <td><button type="button" class="btn btn-primary" (click)="EditarC(car)">Editar</button> -->
+                        </td>
+                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                        <!-- <td><button type="button" class="btn btn-danger" (click)="EliminarC(car)">Eliminar</button></td> -->
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+
+<!-- modal para actualizar datos  -->
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar datos</h4>
+        <button class="close" type="button" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <!-- <form (ngSubmit)="abrirC()" #form="ngForm"> -->
+            <!-- marca -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Marca</label>
+                <!-- <input [(ngModel)]="brand" type="text" id="brand" name="brand" class="form-control" placeholder="Actualiza modelo" /> -->
+            </div>
+            <!-- modelo -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Modelo</label>
+                <!-- <input  [(ngModel)]="model" type="text" id="model" name="model" class="form-control" placeholder="Actualiza marca" /> -->
+            </div>
+            <!-- color -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Color</label>
+                <!-- <input [(ngModel)]="color" type="text" id="color"  name="color" class="form-control" placeholder="Actualiza color" /> -->
+            </div>
+            <!-- año -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Año</label>
+                <!-- <input [(ngModel)]="year"  type="year" id="year" name="year" class="form-control" placeholder="Actualiza año" /> -->
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">actualizar</button>
+        </form>
+    </div>

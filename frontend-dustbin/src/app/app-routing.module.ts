@@ -7,16 +7,27 @@ import { RegisterComponent } from './session/features/register/register.componen
 import { MenuComponent } from './session/features/menu/menu.component';
 import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
+import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
+import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
+
+
+
+import { LoginGuard } from './guards/Login/login.guard';
+import { AuthGuard } from './guards/Usuario/usuario.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'sMenu', component: MenuSensoresComponent },
-  { path: 'aMenu', component: MenuAdminComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: 'email', component: EmailComponent },
+  { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
+  { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
+
+  { path: 'aMenu', component: MenuAdminComponent, },
+  { path: 'sMenu', component: MenuSensoresComponent, },
+  { path: 'cMenu', component: MenuClientsComponent, },
+  { path: 'dMenu', component: MenuDustbinsComponent, },
+
+  { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
+  { path: 'email', component: EmailComponent,  },
 
   { path:'notfound', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
