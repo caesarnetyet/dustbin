@@ -11,17 +11,21 @@
     <input type="checkbox" id="btn" hidden>
     <label for="btn" class="menu-btn">
       <i class="fas fa-bars"></i>
-      <i class="fas fa-times"></i>
     </label>
     <nav id="sidebar">
       <div class="title">Menu</div>
       <ul class="list-items">
         <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-        <li><a href="#"><i class="fas fa-sliders-h"></i>Clients</a></li>
-        <li><a href="/sMenu"><i class="fas fa-address-book"></i>Sensores</a></li>
-      
-        <li><a href="/sMenu"><i class="fas fa-address-book"></i><button class="fas fa-user btn btn-outline-dark" type="button" data-mdb-ripple-color="dark" (click)="cerrarSesion()" style="color: white; background-color: transparent;">Cerrar Sesión</button></a></li>
-
+        <li><a href="/cMenu"><i class="fas fa-user"></i>Clients</a></li>
+        <li><a href="/sMenu"><i class="fas fa-microchip"></i>Sensores</a></li>
+        <li><a href="/dMenu"><i class="fas fa-truck"></i>Dustbins</a></li>
+  
+        <li>
+          <button class="btn btn-outline-dark" type="button" data-mdb-ripple-color="dark" style="color: white; background-color: transparent;" (click)="cerrarSesion()">
+            <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+        </li>
+        
 
 
       
