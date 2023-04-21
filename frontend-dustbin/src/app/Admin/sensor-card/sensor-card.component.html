@@ -1,0 +1,14 @@
+<div class="card-container">
+    <div class="card">
+      <img [src]="sensor.imagen" alt="Imagen del carrito">
+      <div class="card-content">
+        <h2>{{sensor.modelo}}</h2>
+        <p>{{sensor.descripcion}}</p>
+        <h3>Sensores</h3>
+        <ul>
+          <li *ngFor="let sensor of sensor.sensores">{{sensor.modelo}}</li>
+        </ul>
+      </div>
+    </div>
+ 
+  
