@@ -34,31 +34,16 @@ export class LoginComponent {
     }
 
     this.authService.login(form).subscribe(
-     
       (res) => {
-        if (res==400)
-        {
-          console.log(res);
-          alert("Contraseña o Email Incorrectos")
-        }
-
-        else
-        {
-          console.log(res);
-          this.authService.setToken(res.token);
-          
-          localStorage.setItem('email', form.email);
-          this.router.navigate(['/menu']);
-          
-          
-        }
-      },
-      (err) => {
-        if (err == 500)
-        {
-          alert("Nos encontramos en mantenimiento");
-        }
+        if (res.status === 400) {
+         console.log("error");
+       
+      } else {
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/aMenu']);
       }
+    },
     );
 
    
