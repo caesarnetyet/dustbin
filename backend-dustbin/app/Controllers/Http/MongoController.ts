@@ -1,36 +1,19 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Ws from 'App/Services/Ws';
-const connect = require('App/Controllers/Conection/MongoConecction')
-const { SensorModel, DetailsModel } = require('App/Models/mongoModels')
-
+//import Ws from 'App/Services/Ws';
+//const { SensorModel, DetailsModel } = require('App/Models/mongoModels')
+const client = require('App/Controllers/Conection/MongoConecction')
+const dbName = 'Prueba';
 export default class MongoController {
   public async getSensors({ }: HttpContextContract) {
     try {
-      await connect();
-
+      await client.connect();
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-      const data = [await SensorModel.findOne({}).sort({ _id: -1 })];
-      Ws.io.emit('Humo', JSON.stringify({ data }));
-      return data;
+      const db = client.db(dbName);
+      const collection = db.collection('sensors');
+      const findResult = await collection.find({}).toArray();
+      return findResult;
     } catch (error) {
-      console.log(error);
-      return { message: 'Error' };
-    }
-  }
 
-  public async getDetails({ }: HttpContextContract) {
-    try {
-      await connect();
-      const detailsChangeStream = DetailsModel.watch();
-      detailsChangeStream.on('change', (change) => {
-        console.log(change);
-      });
-      Ws.io.emit('details', JSON.stringify({ data: [await DetailsModel.findOne({}).sort({ _id: -1 })] }));
-      return [await DetailsModel.findOne({}).sort({ _id: -1 })];
-      console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } catch (error) {
-      console.log(error);
-      return { message: 'Error' };
     }
   }
 }

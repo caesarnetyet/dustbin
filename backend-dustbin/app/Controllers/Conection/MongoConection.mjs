@@ -12,7 +12,6 @@ async function run() {
     const changeStream = collection.watch();
     changeStream.on("change", (change) => {
       console.log(change);
-
     }
     );
   }
