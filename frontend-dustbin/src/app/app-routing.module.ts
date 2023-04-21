@@ -7,14 +7,16 @@ import { RegisterComponent } from './session/features/register/register.componen
 import { MenuComponent } from './session/features/menu/menu.component';
 import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
+import { LoginGuard } from './guards/Login/login.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
+  { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
+
   { path: 'sMenu', component: MenuSensoresComponent },
   { path: 'aMenu', component: MenuAdminComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'email', component: EmailComponent },
 
