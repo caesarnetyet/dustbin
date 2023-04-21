@@ -17,7 +17,7 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef) { }
-  socket = io("192.168.1.68:3333");
+  socket = io("192.168.117.27:3333");
 
   ngOnInit() {
     // this.createChart();
