@@ -7,6 +7,11 @@ import { RegisterComponent } from './session/features/register/register.componen
 import { MenuComponent } from './session/features/menu/menu.component';
 import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
+import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
+import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
+
+
+
 import { LoginGuard } from './guards/Login/login.guard';
 import { AuthGuard } from './guards/Usuario/usuario.guard';
 
@@ -16,8 +21,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
   { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
 
-  { path: 'sMenu', component: MenuSensoresComponent,canActivate:[AuthGuard] },
-  { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard] },
+  { path: 'aMenu', component: MenuAdminComponent, },
+  { path: 'sMenu', component: MenuSensoresComponent, },
+  { path: 'cMenu', component: MenuClientsComponent, },
+  { path: 'dMenu', component: MenuDustbinsComponent, },
+
   { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
   { path: 'email', component: EmailComponent,  },
 
