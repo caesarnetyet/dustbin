@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uri = "mongodb://localhost:30001/mydb"
+const uri = "mongodb://206.189.229.90:30001/mydb"
 // Función para establecer la conexión a MongoDB
 const connect = async () => {
   try {
