@@ -13,8 +13,8 @@ import { Login } from 'src/app/models/login.interface';
 export class LoginService {
   private _refresh$ = new Subject<void>();
   private registerUserUrl = API_URL + '/user';
-  private loginUrl = API_URL + 'user/login';
-  private logoutUrl = API_URL + '/logout';
+  private loginUrl = API_URL + '/user/login';
+  private logoutUrl = API_URL + '/user/logout';
 
   constructor(private http: HttpClient) { }
   get_refresh$() {
@@ -46,13 +46,19 @@ export class LoginService {
   }
   login(login:Login): Observable<any> {
     
-    return this.http.post(`${this.loginUrl}`, login);
+    return this.http.post(`${this.loginUrl}`, login)
+    .pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+
   };
   
 
   logout() {
-    this.http.post(`${this.logoutUrl}`, {});
     localStorage.removeItem('token');
+    this.http.post(`${this.logoutUrl}`, {});
+   
 
   }
 

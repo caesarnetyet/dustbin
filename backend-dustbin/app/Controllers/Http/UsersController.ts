@@ -64,7 +64,9 @@ export default class UsersController {
     })
     const payload = await request.validate({ schema: loginSchema })
     const { token } = await auth.use('api').attempt(payload.email, payload.password)
+   
     return { token }
+
   }
 
   public async update({ request, auth }: HttpContextContract) {
