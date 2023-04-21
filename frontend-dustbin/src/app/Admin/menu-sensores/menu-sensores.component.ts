@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SocketService } from 'src/app/services/Socket/socket.service';
+import { io } from "socket.io-client";
 import { Chart } from 'chart.js';
 
-import { io } from "socket.io-client";
+
 
 @Component({
   selector: 'app-menu-sensores',
