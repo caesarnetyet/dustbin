@@ -8,7 +8,7 @@ const mongoSensorSchema = new Schema({
   id_sensor: Number,
 });
 
-const SensorModel = mongo.model('sensor', mongoSensorSchema);
+const SensorModel = mongo.model('sensors', mongoSensorSchema);
 
 
 // Definición del esquema de la colección 'details'
@@ -22,4 +22,10 @@ const mongoDetailsSchema = new Schema({
 const DetailsModel = mongo.model('details', mongoDetailsSchema);
 
 
+
 module.exports = { SensorModel, DetailsModel };
+// Configurar watch en los modelos
+SensorModel.watch().on('insert', (change) => {
+  console.log('Nueva inserción:', change);
+  console.log('Nueva inserción:');
+});

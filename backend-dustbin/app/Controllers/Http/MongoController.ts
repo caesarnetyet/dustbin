@@ -7,13 +7,10 @@ export default class MongoController {
   public async getSensors({ }: HttpContextContract) {
     try {
       await connect();
-      const sensorChangeStream = SensorModel.watch();
-      sensorChangeStream.on('change', (change) => {
-        console.log(change);
-      });
+
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
       const data = [await SensorModel.findOne({}).sort({ _id: -1 })];
-      Ws.io.emit('event', { data: "Hola mundito" });
+      Ws.io.emit('Humo', JSON.stringify({ data }));
       return data;
     } catch (error) {
       console.log(error);
