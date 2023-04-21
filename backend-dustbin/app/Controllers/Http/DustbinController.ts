@@ -37,10 +37,10 @@ export default class DustbinController {
   public async getDustbins({ request }: HttpContextContract) {
     const dustbins = await Dustbin
     .query()
-    .from('Dustbin')
-    .select('Dustbin.id', 'Dustbin.name', 'Dustbin.model_id', 'Dustbin.user_id as Usuario', 'Model.name as model_name', 'User.name as user_name')
-    .join('Model', 'Dustbin.model_id', 'Model.id')
-    .join('User', 'Dustbin.user_id', 'User.id')
+    .from('dustbins')
+    .select('dustbins.id', 'dustbins.name', 'dustbins.model_id', 'dustbins.user_id as Usuario', 'models.name as model_name', 'users.name as user_name')
+    .join('models', 'dustbins.model_id', 'models.id')
+    .join('users', 'dustbins.user_id', 'users.id')
     return dustbins
   }
 
