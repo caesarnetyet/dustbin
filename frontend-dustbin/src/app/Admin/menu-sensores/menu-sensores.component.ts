@@ -17,7 +17,7 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef) { }
-  socket = io("192.168.1.7:3333");
+  socket = io("192.168.1.68:3333");
 
   ngOnInit() {
     // this.createChart();
@@ -87,7 +87,7 @@ export class MenuSensoresComponent {
     this.socket.on('connect', () => {
       console.log(this.socket.id);
     });
-    this.socket.on('event', (data: any) => {
+    this.socket.on('Humo', (data: any) => {
       console.log(data);
     });
   }

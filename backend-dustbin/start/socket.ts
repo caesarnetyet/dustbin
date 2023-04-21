@@ -1,4 +1,5 @@
 import Ws from 'App/Services/Ws'
+import {runMongo} from 'App/Controllers/Conection/MongoConection'
 
 Ws.boot()
 
@@ -6,6 +7,7 @@ Ws.boot()
  * Listen for incoming socket connections
  */
 Ws.io.on('connection', (socket) => {
+  const Mongo = runMongo()
 
   socket.emit('news', { hello: 'world' })
   console.log('a user connected')
@@ -20,6 +22,7 @@ Ws.io.on('connection', (socket) => {
     console.log(data)
     socket.broadcast.emit('pong', data)
   })
+  console.log("A mi socket llego mongo"+Mongo)
 })
 
 
