@@ -1,0 +1,112 @@
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a routerLink="/aMenu"><img src="assets/images/trashcar1.png" alt="logo" width="100px" height="70px"></a>
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars text-light"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/cMenu">
+                        <div>
+                            <i class="fas fa-user"></i>  
+                        </div>
+
+                        Clients
+                    </a>
+                </li>
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/sMenu">
+                        <div>
+                            <i class="fas fa-microchip"></i> 
+                        </div>
+                        Sensors
+                    </a>
+                </li>
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/dMenu">
+                        <div>
+                            <i class="fas fa-truck"></i> 
+                        </div>
+                        Dustbins
+                    </a>
+                </li>
+                <li class="nav-item text-center mx-2 mx-lg-1">
+                    <a class="nav-link" outerLinkActive="active-link" routerLink="/menuS">
+                        <div>
+                            <i class="fas fa-truck"></i> 
+                        </div>
+                        Model 
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+       
+        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#registerModelsModal">
+           <button class="btn btn-success" type="button" data-mdb-ripple-color="dark">Register Modal</button>
+          </a>
+          <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
+            <button class="btn btn-danger" type="button" data-mdb-ripple-color="dark">cerrar Sesion </button>
+        </form>
+        
+
+    </div>
+</nav>
+<div class="card-container">
+    <div *ngFor="let sensor of sensoress" class="card">
+      <img [src]="sensor.imagen" alt="Imagen del carrito">
+      <div class="card-content">
+        <h2>{{sensor.modelo}}</h2>
+        <p>{{sensor.descripcion}}</p>
+        <h3>Sensores</h3>
+        <ul>
+          <li *ngFor="let s of sensor.sensores">{{s.modelo}} - {{s.tipo}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="registerModelsModal" tabindex="-1" aria-labelledby="registerModelsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModelsModalLabel">Register Models</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form #carritoForm="ngForm" (ngSubmit)="submitForm(carritoForm)" class="my-4 p-3 border form-style">
+                <div class="form-group">
+                  <label for="nombre">Dustbin Name:</label>
+                  <input type="text" id="name" name="name" ngModel required class="form-control">
+                </div>
+              
+                <div class="form-group">
+                  <label for="sensores">Sensors:</label>
+                  <div *ngFor="let sensor of sensores" class="form-check">
+                    <input type="checkbox" name="sensores" value="{{sensor}}" [(ngModel)]="sensoresSeleccionados[sensor]" class="form-check-input">
+                    <label class="form-check-label">{{sensor}}</label>
+                  </div>
+                </div>
+              
+                <button type="submit" class="btn btn-primary">Registrar carrito</button>
+              </form>
+        </div>
+     
+      </div>
+    </div>
+  </div>
+
+  

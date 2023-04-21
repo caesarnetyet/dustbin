@@ -14,6 +14,7 @@ import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
 import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
 import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
+import { CardComponent } from './Admin/card/card.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.compo
     EmailComponent,
     NotFoundComponent,
     MenuClientsComponent,
-    MenuDustbinsComponent
+    MenuDustbinsComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

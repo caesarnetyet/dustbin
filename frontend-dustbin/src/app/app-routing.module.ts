@@ -14,6 +14,7 @@ import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.compo
 
 import { LoginGuard } from './guards/Login/login.guard';
 import { AuthGuard } from './guards/Usuario/usuario.guard';
+import { CardComponent } from './Admin/card/card.component';
 
 
 const routes: Routes = [
@@ -25,12 +26,13 @@ const routes: Routes = [
   { path: 'sMenu', component: MenuSensoresComponent, },
   { path: 'cMenu', component: MenuClientsComponent, },
   { path: 'dMenu', component: MenuDustbinsComponent, },
+  { path:'menuS',component:CardComponent},
 
   { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
   { path: 'email', component: EmailComponent,  },
 
   { path:'notfound', component: NotFoundComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 
 ];
 
