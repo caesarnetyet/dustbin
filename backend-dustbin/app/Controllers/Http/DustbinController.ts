@@ -35,7 +35,12 @@ export default class DustbinController {
   }
 
   public async getDustbins({ request }: HttpContextContract) {
-    const dustbins = await Dustbin.all()
+    const dustbins = await Dustbin
+    .query()
+    .from('Dustbin')
+    .select('Dustbin.id', 'Dustbin.name', 'Dustbin.model_id', 'Dustbin.user_id as Usuario', 'Model.name as model_name', 'User.name as user_name')
+    .join('Model', 'Dustbin.model_id', 'Model.id')
+    .join('User', 'Dustbin.user_id', 'User.id')
     return dustbins
   }
 
@@ -68,4 +73,5 @@ export default class DustbinController {
     await findDustbin.delete()
     return { message: 'Modelo eliminado' }
   }
+
 }
