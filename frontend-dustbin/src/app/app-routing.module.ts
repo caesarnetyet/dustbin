@@ -22,11 +22,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
   { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
 
-  { path: 'aMenu', component: MenuAdminComponent, },
-  { path: 'sMenu', component: MenuSensoresComponent, },
-  { path: 'cMenu', component: MenuClientsComponent, },
-  { path: 'dMenu', component: MenuDustbinsComponent, },
-  { path:'menuS',component:CardComponent},
+  { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard] },
+  { path: 'sMenu', component: MenuSensoresComponent,canActivate:[AuthGuard] },
+  { path: 'cMenu', component: MenuClientsComponent,canActivate:[AuthGuard] },
+  { path: 'dMenu', component: MenuDustbinsComponent,canActivate:[AuthGuard] },
+  { path:'menuS',component:CardComponent, canActivate:[AuthGuard]},
 
   { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
   { path: 'email', component: EmailComponent,  },
