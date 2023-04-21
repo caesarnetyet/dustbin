@@ -59,8 +59,8 @@ export default class ModelController {
     return { message: 'Modelo eliminado' }
   }
 
-  public async getModelSensors({ }: HttpContextContract) {
-    const models = await Database.query().select('*').from('models');
+  public async getModelSensors({params}: HttpContextContract) {
+    const models = await Database.query().select('*').from('models').where('models.id','=',params.id);
     const modelSensors = await Model_Sensor.query().whereIn('model_id', models.map(model => model.id));
     const sensors = await Sensor.query().whereIn('id', modelSensors.map(modelSensor => modelSensor.sensor_id));
 
