@@ -1,24 +1,21 @@
 import { Injectable } from '@angular/core';
-import io from 'socket.io-client';
 import { Observable } from 'rxjs';
- 
+import { OnInit } from '@angular/core';
+import { io } from "socket.io-client";
+
 @Injectable({
   providedIn: 'root'
 })
-export class SocketService {
-  private socket: any;
-  private url = 'http://localhost:3000'; // Cambia esto por la URL de tu servidor de socket
+export class SocketService implements OnInit {
+  socket = io("192.168.1.7:3333");// Cambia esto por la URL de tu servidor de socket
 
-  constructor() {
-    this.socket = io(this.url);
-  }
+  // constructor() {
+  //   this.socket = io(this.url);
+  // }
 
-  // Método para recibir datos del servidor
-  public getChartData = () => {
-    return Observable.create((observer: any) => {
-      this.socket.on('sensor', (data: any) => {
-        observer.next(data);
-      });
+  ngOnInit(): void {
+    this.socket.on('connect', () => {
+      console.log(this.socket.id);
     });
   }
 }

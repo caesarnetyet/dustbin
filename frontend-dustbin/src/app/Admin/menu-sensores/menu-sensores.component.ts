@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SocketService } from 'src/app/services/Socket/socket.service';
 import { Chart } from 'chart.js';
 
+import { io } from "socket.io-client";
+
 @Component({
   selector: 'app-menu-sensores',
   templateUrl: './menu-sensores.component.html',
@@ -15,11 +17,13 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef) { }
+  socket = io("192.168.1.7:3333");
 
   ngOnInit() {
-    this.createChart();
-    this.listenForChartData();
-    console.log(this.chartCanvas.nativeElement);
+    // this.createChart();
+    // this.listenForChartData();
+    // console.log(this.chartCanvas.nativeElement);
+    this.helloSocket();
   }
 
   createChart() {
@@ -60,15 +64,13 @@ export class MenuSensoresComponent {
     });
   }
 
+
   // Método para escuchar los datos del servidor de socket
   listenForChartData() {
-    this.socketService.getChartData().subscribe((data: any) => {
-      // Se asume que los datos recibidos son de la forma { hora: <timestamp>, distancia: <valor> }
-      const hora = new Date(data.hora).toLocaleTimeString();
-      const distancia = data.distancia;
-      this.chartData[hora] = distancia;
+   /* this.socketService.getChartData().subscribe((data: any) => {
+      this.chartData = data;
       this.updateChart();
-    });
+    });*/
   }
 
   // Método para actualizar el gráfico con los nuevos datos
@@ -78,5 +80,15 @@ export class MenuSensoresComponent {
     this.chart.data.labels = labels;
     this.chart.data.datasets[0].data = data;
     this.chart.update();
+  }
+
+
+  helloSocket() {
+    this.socket.on('connect', () => {
+      console.log(this.socket.id);
+    });
+    this.socket.on('event', (data: any) => {
+      console.log(data);
+    });
   }
 }
