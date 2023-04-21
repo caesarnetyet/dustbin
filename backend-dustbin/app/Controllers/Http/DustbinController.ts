@@ -38,7 +38,7 @@ export default class DustbinController {
   public async getDustbins({ request }: HttpContextContract) {
     const dustbins = await Database.from('dustbins')
       .innerJoin('models', 'models.id', '=', 'dustbins.model_id')
-      .innerJoin('users', 'users.id', '=', 'dustbins.user_id').select('dustbins.name as dustbin', 'models.name as model', 'models.price', 'models.battery_included', 'users.name as user')
+      .innerJoin('users', 'users.id', '=', 'dustbins.user_id').select('dustbins.id','dustbins.name as dustbin', 'models.name as model', 'models.price', 'models.battery_included', 'users.name as user')
     return dustbins
   }
 
