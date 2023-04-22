@@ -12,6 +12,4 @@ RUN yarn build
 
 COPY .env.production ./build/.env
 
-RUN yarn install --production --frozen-lockfile
-
 CMD ["node", "build/server.js"]

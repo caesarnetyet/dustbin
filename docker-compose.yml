@@ -1,6 +1,15 @@
 version: '3.9'
 
 services:
+  backend:
+    build: ./backend-dustbin
+    ports:
+      - "3333:3333"
+    networks:
+      - mongo-net
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql:8.0
     environment:
@@ -8,12 +17,16 @@ services:
       MYSQL_DATABASE: dustbin
 
     ports:
-      - "3310:3306"
+      - "3310:3310"
+    networks:
+      - mongo-net
 
   redis:
     image: redis:bullseye
     ports:
       - "6379:6379"
+    networks:
+      - mongo-net
 
   mongo1:
     image: mongo:5
@@ -34,6 +47,8 @@ services:
       test: test $$(echo "rs.initiate({_id:'my-replica-set',members:[{_id:0,host:\"mongo1:30001\"},{_id:1,host:\"mongo2:30002\"},{_id:2,host:\"mongo3:30003\"}]}).ok || rs.status().ok" | mongo --port 30001 --quiet) -eq 1
       interval: 10s
       start_period: 30s
+    networks:
+      - mongo-net
 
   mongo2:
     image: mongo:5
@@ -50,6 +65,8 @@ services:
       - ./data/mongo-2:/data/db
     ports:
       - 30002:30002
+    networks:
+      - mongo-net
 
   mongo3:
     image: mongo:5
@@ -66,3 +83,9 @@ services:
       - ./data/mongo-3:/data/db
     ports:
       - 30003:30003
+    networks:
+      - mongo-net
+
+networks:
+  mongo-net:
+    driver: bridge
