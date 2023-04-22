@@ -2,17 +2,17 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Model from 'App/Models/Model'
-import Model_Sensor from 'App/Models/Model_Sensor'
-import Sensor from 'App/Models/Sensor'
-import { model } from 'mongoose'
+
 
 export default class ModelController {
   public async createModel({ request }: HttpContextContract) {
     const newModelSchema = schema.create({
       name: schema.string(),
       price: schema.number(),
+      sensors: schema.array().members(schema.number()),
       battery_included: schema.boolean(),
     })
+
     const payload = await request.validate({ schema: newModelSchema })
     if (!payload) {
       return { message: 'Error al guardar el modelo' }
@@ -22,6 +22,12 @@ export default class ModelController {
     model.price = payload.price
     model.battery_included = payload.battery_included
     await model.save()
+
+    for (const sensor of payload.sensors) {
+      await model.related('sensors').attach([sensor])
+    }
+
+
     return model
   }
 
@@ -61,10 +67,10 @@ export default class ModelController {
   }
 
   public async getModelSensors({ params }: HttpContextContract) {
-    const dustbin = await Database.query().from('dustbins').where('dustbins.id','=',params.id).first();
+    const dustbin = await Database.query().from('dustbins').where('dustbins.id', '=', params.id).first();
     const models = await Database.query().from('models')
-    .innerJoin('model_sensors as senModel','senModel.model_id','=','models.id')
-    .innerJoin('sensors','sensors.id','=','senModel.sensor_id');
+      .innerJoin('model_sensors as senModel', 'senModel.model_id', '=', 'models.id')
+      .innerJoin('sensors', 'sensors.id', '=', 'senModel.sensor_id');
     dustbin["sensors"] = models
     return dustbin
   }
