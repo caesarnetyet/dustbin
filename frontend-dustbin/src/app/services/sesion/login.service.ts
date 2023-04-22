@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { API_URL } from '../../env';
 import { User } from '../../models/usuario.interface';
 import { Login } from 'src/app/models/login.interface';
+import { ModelS } from 'src/app/models/modelS.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class LoginService {
   private registerUserUrl = API_URL + '/user';
   private loginUrl = API_URL + '/user/login';
   private logoutUrl = API_URL + '/user/logout';
+  private createModel = API_URL + '/model/create';
+  private getModel = API_URL +'/model/getAll'
 
   constructor(private http: HttpClient) { }
   get_refresh$() {
@@ -69,4 +72,22 @@ export class LoginService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  createModelSensor(data: any, token: any) {
+    const headers = new HttpHeaders({
+     
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<ModelS>(`${this.createModel}`, data, { headers })
+
+  }
+
+  getModelSensor(token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.getModel}`, { headers });
+  }
+  
 }
+

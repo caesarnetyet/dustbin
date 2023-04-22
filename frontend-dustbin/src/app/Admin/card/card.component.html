@@ -65,15 +65,17 @@
     </div>
 </nav>
 <div class="card-container">
-    <div *ngFor="let sensor of sensoress" class="card">
-      <img [src]="sensor.imagen" alt="Imagen del carrito">
+    <div *ngFor="let sensor of items" class="card">
+      <img  alt="Imagen del carrito">
       <div class="card-content">
-        <h2>{{sensor.modelo}}</h2>
-        <p>{{sensor.descripcion}}</p>
-        <h3>Sensores</h3>
-        <ul>
-          <li *ngFor="let s of sensor.sensores">{{s.modelo}} - {{s.tipo}}</li>
-        </ul>
+        <h1>Model Name</h1>
+        <h2>{{sensor.name}}</h2>
+        <h2>Price</h2>
+        <h3>${{sensor.price}}</h3>
+        <h2>Include Baterry</h2>
+        <h3>{{sensor.battery_included ? 'Yes' : 'No'}}</h3>
+
+       
       </div>
     </div>
   </div>
@@ -94,17 +96,26 @@
                 </div>
               
                 <div class="form-group">
-                  <label for="sensores">Sensors:</label>
-                  <div *ngFor="let sensor of sensores" class="form-check">
-                    <input type="checkbox" name="sensores" value="{{sensor}}" [(ngModel)]="sensoresSeleccionados[sensor]" class="form-check-input">
-                    <label class="form-check-label">{{sensor}}</label>
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" ngModel required class="form-control">
                   </div>
-                </div>
-              
+                  <br>
+                  <div class="form-group">
+                    <div class="btn-group" role="group">
+                        <div class="form-group">
+                            <label for="battery_included">Battery included:</label>
+                            <select id="battery_included" name="battery_included" [(ngModel)]="batteryIncluded" class="form-control">
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                            </select>
+                          </div>
+                    </div>
+                  </div>
+                  <br>
                 <button type="submit" class="btn btn-primary">Registrar carrito</button>
               </form>
         </div>
-     
+    
       </div>
     </div>
   </div>

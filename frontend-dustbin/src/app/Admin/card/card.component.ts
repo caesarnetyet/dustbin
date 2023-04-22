@@ -1,41 +1,74 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { LoginService } from 'src/app/services/sesion/login.service';
 interface SensoresSeleccionados {
   [key: string]: boolean;
 }
+interface sensoress {
+  id?: number;
+  name?: string;
+  price?: number;
+  battery_included?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  sensoress = [    {      modelo: 'Modelo 1',      descripcion: 'Descripción del modelo 1',      imagen: 'ruta/a/la/imagen1.jpg',      sensores: [        { modelo: 'Sensor 1', tipo: 'Tipo 1' },        { modelo: 'Sensor 2', tipo: 'Tipo 2' },        { modelo: 'Sensor 3', tipo: 'Tipo 3' }      ]
-},
-{
-  modelo: 'Modelo 2',
-  descripcion: 'Descripción del modelo 2',
-  imagen: 'ruta/a/la/imagen2.jpg',
-  sensores: [
-    { modelo: 'Sensor 4', tipo: 'Tipo 4' },
-    { modelo: 'Sensor 5', tipo: 'Tipo 5' },
-    { modelo: 'Sensor 6', tipo: 'Tipo 6' }
-  ]
+constructor(private authService: LoginService){
+
 }
-];
+
+items!: sensoress[] ;
+
+
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+
+    this.authService.getModelSensor(token).subscribe(
+      (res: sensoress[]) => {
+        console.log(res);
+        this.items = res;
+      }
+    );
+      }
+    
+
 
   sensores = ['Sensor 1', 'Sensor 2', 'Sensor 3'];
   sensoresSeleccionados: SensoresSeleccionados = {};
 
-  submitForm(form:any) {
-    const nombre = form.value.nombre;
-    const sensoresSeleccionados = [];
-    for (const sensor in this.sensoresSeleccionados) {
-      if (this.sensoresSeleccionados[sensor]) {
-        sensoresSeleccionados.push(sensor);
+  batteryIncluded = false;
+
+
+  submitForm(form: NgForm) {
+    const token = localStorage.getItem('token')
+    console.log(token)
+    const data = {
+      name: form.value.name,
+      price: form.value.price,
+      battery_included: this.batteryIncluded
+    };
+    console.log(data);
+
+    this.authService.createModelSensor(data,token).subscribe(
+      (res)=>
+      {
+        console.log(res)
       }
-    }
-    console.log('Nombre del carrito:', nombre);
-    console.log('Sensores seleccionados:', sensoresSeleccionados);
+    )
+
+
+    // send data to server or perform other actions
+  }
+
+    
   }
 
 
-}
+
