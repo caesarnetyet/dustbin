@@ -52,6 +52,7 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/create', 'ModelController.createModel').middleware('auth')
   Route.get('/getAll', 'ModelController.getModels').middleware('auth')
+
   Route.get('/getModelSensor', 'ModelController.getModelSensors').middleware('auth')
   Route.get('/getModelSensor/:id', 'ModelController.getModelSensors').middleware('auth')
   Route.put('/update/:id', 'ModelController.updateModel').middleware('auth')

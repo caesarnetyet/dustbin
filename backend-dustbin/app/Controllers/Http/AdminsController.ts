@@ -28,7 +28,7 @@ export default class AdminsController {
     return user
   }
 
-  public async getUsers({ request }: HttpContextContract) {
+  public async getUsers() {
     const users = await User.all()
     return users
   }

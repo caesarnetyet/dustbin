@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { schema } from '@ioc:Adonis/Core/Validator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Dustbin from 'App/Models/Dustbin'
 import Model from 'App/Models/Model'
@@ -35,10 +35,10 @@ export default class DustbinController {
     return dustbin
   }
 
-  public async getDustbins({ request }: HttpContextContract) {
+  public async getDustbins() {
     const dustbins = await Database.from('dustbins')
       .innerJoin('models', 'models.id', '=', 'dustbins.model_id')
-      .innerJoin('users', 'users.id', '=', 'dustbins.user_id').select('dustbins.id','dustbins.name as dustbin', 'models.name as model', 'models.price', 'models.battery_included', 'users.name as user','models.id as model_id','users.id as user_id')
+      .innerJoin('users', 'users.id', '=', 'dustbins.user_id').select('dustbins.id', 'dustbins.name as dustbin', 'models.name as model', 'models.price', 'models.battery_included', 'users.name as user', 'models.id as model_id', 'users.id as user_id')
     return dustbins
   }
 
