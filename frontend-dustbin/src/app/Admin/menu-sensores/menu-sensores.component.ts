@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SocketService } from 'src/app/services/Socket/socket.service';
+import { io } from "socket.io-client";
 import { Chart } from 'chart.js';
 
-import { io } from "socket.io-client";
+
 
 @Component({
   selector: 'app-menu-sensores',
@@ -17,13 +18,12 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef) { }
-  socket = io("192.168.1.68:3333");
+  socket = io("192.168.119.26:3333");
 
   ngOnInit() {
     // this.createChart();
     // this.listenForChartData();
     // console.log(this.chartCanvas.nativeElement);
-    this.helloSocket();
   }
 
   createChart() {
@@ -83,12 +83,5 @@ export class MenuSensoresComponent {
   }
 
 
-  helloSocket() {
-    this.socket.on('connect', () => {
-      console.log(this.socket.id);
-    });
-    this.socket.on('Humo', (data: any) => {
-      console.log(data);
-    });
-  }
+
 }

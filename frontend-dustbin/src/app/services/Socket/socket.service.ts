@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
   providedIn: 'root'
 })
 export class SocketService implements OnInit {
-  socket = io("192.168.1.7:3333");// Cambia esto por la URL de tu servidor de socket
+  socket = io("192.168.119.26:3333");// Cambia esto por la URL de tu servidor de socket
 
   // constructor() {
   //   this.socket = io(this.url);

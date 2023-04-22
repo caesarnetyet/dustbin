@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, ManyToMany, column, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Model from './Model'
 
 export default class Sensor extends BaseModel {
   @column({ isPrimary: true })
@@ -13,6 +14,9 @@ export default class Sensor extends BaseModel {
 
   @column()
   public description: string
+
+  @manyToMany(() => Model)
+  public models: ManyToMany<typeof Model>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
