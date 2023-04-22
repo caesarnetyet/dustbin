@@ -26,7 +26,7 @@ export default class ModelController {
     for (const sensor of payload.sensors) {
       await model.related('sensors').attach([sensor])
     }
-
+    await model.load('sensors')
 
     return model
   }
