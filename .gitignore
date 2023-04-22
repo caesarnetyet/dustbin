@@ -2,3 +2,4 @@ data
 .docker
 mysql
 redis
+mongodb-persistence

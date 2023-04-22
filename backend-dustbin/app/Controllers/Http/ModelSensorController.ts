@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import Model_Sensor from 'App/Models/Model_Sensor'
-
+import Model from 'App/Models/Model'
 export default class ModelSensorController {
   public async createModelSensor({ request }: HttpContextContract) {
     const newModelSensorSchema = schema.create({
@@ -19,8 +19,8 @@ export default class ModelSensorController {
     return model
   }
 
-  public async getModelSensors({ request }: HttpContextContract) {
-    const models = await Model_Sensor.all()
+  public async getModelSensors() {
+    const models = await Model.query().preload('sensors')
     return models
   }
 
