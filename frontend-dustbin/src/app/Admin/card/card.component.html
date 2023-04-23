@@ -77,9 +77,7 @@
     <div class="descr">Price: ${{sensor.price}}</div>
     <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
     <div class="descr">Sensors:
-      <ul>
-        <li *ngFor="let s of sensor.sensors">{{s.name}}</li>
-      </ul>
+      *ngFor="let s of sensor.sensors">{{s.name}} 
     </div>
   </li>
 </ol>
