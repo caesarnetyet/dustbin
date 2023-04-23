@@ -46,7 +46,7 @@ li:nth-child(6n + 6) { --accent-color: #f078c2 }
 ol li {
   counter-increment: stepnr;
   width: 18rem;
-  --borderS: 2rem;
+  --borderS: 4rem; /* Cambio aquí */
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -54,6 +54,7 @@ ol li {
   padding-left: calc(var(--borderS) + 2rem);
   position: relative;
 }
+
 ol li::before,
 ol li::after {
   inset: 0;
