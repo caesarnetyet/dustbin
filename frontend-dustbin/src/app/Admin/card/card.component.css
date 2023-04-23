@@ -46,7 +46,7 @@ li:nth-child(6n + 6) { --accent-color: #f078c2 }
 ol li {
   counter-increment: stepnr;
   width: 18rem;
-  --borderS: 4rem; /* Cambio aquí */
+  --borderS: rem; /* Cambio aquí */
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -67,10 +67,11 @@ ol li::before {
   content: counter(stepnr);
   color: var(--accent-color);
   padding-left: 10rem;
-  font-size: 12rem;
+  font-size: 6rem; /* Modifica aquí */
   font-weight: 700;
   overflow: hidden;
 }
+
 
 ol li::after {
   content: "";
@@ -80,7 +81,7 @@ ol li::after {
 ol li > * { width: 7.5rem }
 ol li .icon { font-size: 2rem; color: var(--accent-color); text-align: center }
 ol li .title { font-size: 2rem; font-weight: 500 }
-ol li .descr { font-size: 0.8rem; font-weight: 300 }
+ol li .descr { font-size: 1rem; font-weight: 300 }
 
 .credits { margin-top: 2rem; text-align: right }
 .credits a { color: var(--color) }
