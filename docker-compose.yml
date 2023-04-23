@@ -17,7 +17,7 @@ services:
       MYSQL_DATABASE: dustbin
 
     ports:
-      - "3310:3310"
+      - "3310:3306"
     networks:
       - mongo-net
 
