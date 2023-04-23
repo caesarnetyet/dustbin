@@ -1,17 +1,14 @@
-<div class="card-container">
-    <div class="card">
-      <img [src]="sensor.imagen" alt="Imagen del carrito">
-      <div class="card-content">
-        <h2>{{sensor.modelo}}</h2>
-        <p>{{sensor.descripcion}}</p>
-        <h3>Sensores</h3>
-        <ul>
-          <li *ngFor="let sensor of sensor.sensores">{{sensor.modelo}}</li>
-        </ul>
-      </div>
+  
+    <h1>sensors </h1>
+    <ol>
+        <li >
+            <div class="icon"><i class="fas fa-truck"></i></div>
+            <div class="title">{{sensor.modelo}}</div>
+            <div class="descr">{{sensor.descripcion}}</div>
+            <div class="descr"> <li *ngFor="let sensor of sensor.sensores">{{sensor.modelo}}</li></div>
+        </li>
+        
+    </ol>
+    <div class="credits">
+        <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">inspired by</a>
     </div>
- 
-  
-  
-  
-  
