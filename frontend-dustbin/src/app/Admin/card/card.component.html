@@ -64,27 +64,31 @@
 
     </div>
 </nav>
-<div class="card-container">
-    <div *ngFor="let sensor of items" class="card">
-     
-      <div class="card-content">
-        <h1>Model {{sensor.name}}</h1>
-       
-        <h2>Price ${{sensor.price}}</h2>
-  
-        <h2>Include Baterry: {{sensor.battery_included ? 'Yes' : 'No'}}</h2>
-        <h3>Sensores</h3>
-        <ul *ngFor="let s of sensor.sensors">
-          <li >{{s.name}}</li>
-          
-        </ul>
-        
 
-      </div>
+
+
+<!-- cards -->
+
+<h1>OL circle cards</h1>
+<ol>
+  <li *ngFor="let sensor of items">
+    <div class="icon"><i class="fas fa-truck"></i></div>
+    <div class="title">{{sensor.name}}</div>
+    <div class="descr">Price: ${{sensor.price}}</div>
+    <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
+    <div class="descr">Sensors:
+      <ul>
+        <li *ngFor="let s of sensor.sensors">{{s.name}}</li>
+      </ul>
     </div>
-  </div>
+  </li>
+</ol>
 
+<div class="credits">
+  <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">Inspired by</a>
+</div>
 
+<!-- modal para registrar -->
   <div class="modal fade" id="registerModelsModal" tabindex="-1" aria-labelledby="registerModelsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
