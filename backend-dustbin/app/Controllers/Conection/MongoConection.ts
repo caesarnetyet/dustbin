@@ -9,7 +9,7 @@ export async function runMongo() {
   try {
     await client.connect();
     console.log("Connected correctly to server");
-    const db = client.db("Prueba");
+    const db = client.db("test");
     const collection = db.collection("sensors");
     const changeStream = collection.watch();
 

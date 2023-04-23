@@ -17,7 +17,7 @@ export default class extends BaseSchema {
         inTable('roles').
         onDelete('CASCADE')
       table.boolean('is_active').defaultTo(false)
-
+      table.string("code").nullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
