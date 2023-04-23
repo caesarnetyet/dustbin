@@ -3,7 +3,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import User from 'App/Models/User'
 import Route from '@ioc:Adonis/Core/Route'
-import Env from '@ioc:Adonis/Core/Env'
+
 import Database from '@ioc:Adonis/Lucid/Database'
 export default class UsersController {
 
@@ -24,6 +24,7 @@ export default class UsersController {
     })
     const payload = await request.validate({ schema: storeSchema })
     payload['roleId'] = 2
+    payload["code"] = Math.floor(1000 + Math.random() * 9000);
     const user = await User.create(payload)
 
     const signedUrl = Route.makeSignedUrl('activate', {
@@ -32,17 +33,16 @@ export default class UsersController {
       expiresIn: '1 day',
     })
     const { token } = await auth.use('api').generate(user)
-    const url = `${Env.get('FRONTEND_URL')}/activate?signedUrl=${signedUrl}`
     await Mail.send(message => {
       message
         .from('abelardoreyes256@gmail.com')
         .to(user.email)
         .subject('verify your email to activate your account')
-        .htmlView('email/register', { user, signedUrl, url })
+        .htmlView('email/register', { user })
     })
 
 
-    return { user, token }
+    return { user, token, url: signedUrl }
   }
 
   public async activate({ params, response, request }: HttpContextContract) {
@@ -50,6 +50,10 @@ export default class UsersController {
       return response.badRequest({ message: 'Invalid or expired url' })
     }
     const user = await User.findOrFail(params.user)
+
+    if (user.code != request.input('code')) {
+      return response.badRequest({ message: 'Invalid code' })
+    }
     user.is_active = true
     await user.save()
     return response.ok({ message: 'Cuenta activada satistactoriamente' })
@@ -64,7 +68,7 @@ export default class UsersController {
     })
     const payload = await request.validate({ schema: loginSchema })
     const { token } = await auth.use('api').attempt(payload.email, payload.password)
-   
+
     return { token }
 
   }

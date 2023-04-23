@@ -20,6 +20,9 @@ export default class User extends BaseModel {
   public phone: string
 
   @column()
+  public code: string
+
+  @column()
   public is_active: boolean
 
   @column()
