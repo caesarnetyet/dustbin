@@ -55,7 +55,7 @@
 
 
     <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
-      <button class="btn btn-danger" type="button" data-mdb-ripple-color="dark">cerrar Sesion </button>
+      <button class="btn btn-danger" type="button" data-mdb-ripple-color="dark" (click)="cerrarSession()">cerrar Sesion </button>
     </form>
 
   </div>
@@ -76,11 +76,11 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name Sensor</th>
-            <th scope="col">Type Sensor</th>
+            <th scope="col">Sensor Name</th>
+            <th scope="col">Sensor Type</th>
             <th scope="col">Descriptions</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th>--</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -90,19 +90,17 @@
                           <td>{{ car.model }}</td>
                           <td>{{ car.color }}</td>
                           <td>{{ car.year }}</td> -->
-          <tr>
-            <th scope="row">1</th>
-            <td>sensor1</td>
-            <td>sensor1</td>
-            <td>sensor1</td>
+          <tr *ngFor="let s of sensor">
+            <th scope="row">{{s.id}}</th>
+            <td>{{s.name}}</td>
+            <td>{{s.type}}</td>
+            <td>{{s.description}}</td>
 
 
-            <td><button type="button" class="btn btn-primary">Editar</button>
-              <!-- <td><button type="button" class="btn btn-primary" (click)="EditarC(car)">Editar</button> -->
-            </td>
-            <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-            <!-- <td><button type="button" class="btn btn-danger" (click)="EliminarC(car)">Eliminar</button></td> -->
-          </tr>
+            <!-- <td><button type="button" class="btn btn-primary">Editar</button> -->
+              <td><button type="button" class="btn btn-primary"  (click)="open(contenido)">Edit</button>
+            <!-- </td> -->
+           
 
 
         </tbody>
@@ -117,34 +115,31 @@
 <!-- modal para actualizar datos  -->
 <ng-template #contenido let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Editar datos</h4>
+    <h4 class="modal-title">Edit</h4>
     <button class="close" type="button" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form  #form="ngForm">
       <!-- <form (ngSubmit)="abrirC()" #form="ngForm"> -->
       <!-- marca -->
       <div class="form-outline mb-4">
-        <label for="form-label">Marca</label>
-        <!-- <input [(ngModel)]="brand" type="text" id="brand" name="brand" class="form-control" placeholder="Actualiza modelo" /> -->
+        <label for="form-label">Sensor Name</label>
+        <input [(ngModel)]="name" type="text" id="name" name="name" class="form-control" placeholder="Update Sensor Name" />
       </div>
       <!-- modelo -->
       <div class="form-outline mb-4">
-        <label for="form-label">Modelo</label>
-        <!-- <input  [(ngModel)]="model" type="text" id="model" name="model" class="form-control" placeholder="Actualiza marca" /> -->
+        <label for="form-label">Type Sensor</label>
+        <input  [(ngModel)]="type" type="text" id="type" name="type" class="form-control" placeholder="Update Sensor Type" />
       </div>
       <!-- color -->
       <div class="form-outline mb-4">
-        <label for="form-label">Color</label>
-        <!-- <input [(ngModel)]="color" type="text" id="color"  name="color" class="form-control" placeholder="Actualiza color" /> -->
+        <label for="form-label">Description</label>
+        <input [(ngModel)]="description" type="text" id="description"  name="description" class="form-control" placeholder="Update Description" />
       </div>
       <!-- año -->
-      <div class="form-outline mb-4">
-        <label for="form-label">Año</label>
-        <!-- <input [(ngModel)]="year"  type="year" id="year" name="year" class="form-control" placeholder="Actualiza año" /> -->
-      </div>
+      
       <button type="submit" class="btn btn-primary btn-block">actualizar</button>
     </form>
   </div>

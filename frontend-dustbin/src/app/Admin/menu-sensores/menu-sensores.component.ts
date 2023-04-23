@@ -1,7 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SocketService } from 'src/app/services/Socket/socket.service';
-import { io } from "socket.io-client";
 import { Chart } from 'chart.js';
+import { LoginService } from 'src/app/services/sesion/login.service';
+import { SensorsService } from 'src/app/services/sesion/sensors.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+interface sensores {
+  id?: number;
+  name?: string;
+  type?: string;
+  description?: string;
+}
 
 
 
@@ -12,18 +21,27 @@ import { Chart } from 'chart.js';
 
 })
 export class MenuSensoresComponent {
+  @ViewChild('contenido') modalContent:any;
+
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
 
   chart: any;
   chartData: any = {};
 
-  constructor(private socketService: SocketService, private elementRef: ElementRef) { }
-  socket = io("192.168.119.26:3333");
-
+  constructor(private socketService: SocketService, private elementRef: ElementRef, private auth:LoginService, private senosor:SensorsService
+    ,private modalService: NgbModal) { }
+ sensor: sensores[] = [];
   ngOnInit() {
-    // this.createChart();
-    // this.listenForChartData();
-    // console.log(this.chartCanvas.nativeElement);
+     
+    this.senosor.getSensors(localStorage.getItem('token')).subscribe(
+      (res: sensores[]) => {
+        console.log(res);
+        this.sensor = res;
+
+      
+      }
+    );
+    
   }
 
   createChart() {
@@ -63,6 +81,11 @@ export class MenuSensoresComponent {
     }
     });
   }
+   
+  cerrarSession(){
+    this.auth.logout();
+    
+  }
 
 
   // Método para escuchar los datos del servidor de socket
@@ -81,7 +104,28 @@ export class MenuSensoresComponent {
     this.chart.data.datasets[0].data = data;
     this.chart.update();
   }
+  name: string = '';
+  type: string = '';
+  description: string = '';
+  Update(sens:sensores)
+  {
+    const data = {
+      name: sens.name,
+      type: sens.type,
+      description: sens.description,
+    }
+    console.log(sens.id);
+
+  }
 
 
-
+  open(content:any) {
+    console.log(content);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      // modal closed
+    }, (reason) => {
+      // modal dismissed
+    });
+  }
+  
 }

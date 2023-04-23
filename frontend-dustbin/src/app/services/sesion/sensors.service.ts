@@ -1,38 +1,23 @@
 import { Injectable } from '@angular/core';
+import { ModelS } from 'src/app/models/modelS.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-import { API_URL } from '../../env';
-import { User } from '../../models/usuario.interface';
-import { Login } from 'src/app/models/login.interface';
-import { ModelS } from 'src/app/models/modelS.interface';
+import { API_URL } from 'src/app/env';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class SensorsService {
   private _refresh$ = new Subject<void>();
-  private registerUserUrl = API_URL + '/user';
-  private loginUrl = API_URL + '/user/login';
-  private logoutUrl = API_URL + '/user/logout';
   private createModel = API_URL + '/model/create';
   private getModel = API_URL +'/modelSensors/getAll'
   private getSensor = API_URL + '/sensor/getAll'
+  
 
   constructor(private http: HttpClient, private router: Router) { }
-  get_refresh$() {
-    return this._refresh$;
-  }
-
-  getRegister(user: User): Observable<User> {
-    return this.http.post<User>(this.registerUserUrl, user)
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
-  }
 
 
   private handleError(error: HttpErrorResponse) {
@@ -49,38 +34,29 @@ export class LoginService {
     // Devuelve un observable con un mensaje de error
     return throwError('Algo salió mal; por favor inténtelo de nuevo más tarde.');
   }
-  login(login:Login): Observable<any> {
-    
-    return this.http.post(`${this.loginUrl}`, login)
-    .pipe(
-      retry(3),
-      catchError(this.handleError)
-    );
-
-  };
-  
-
-  logout() {
-    localStorage.removeItem('token');
-    this.http.post(`${this.logoutUrl}`, {});
-    this.router.navigate(['/login']);
-    
-   
+  get_refresh$() {
+    return this._refresh$;
+  }
+  createModelSensor(data: any, token: any) {
+    const headers = new HttpHeaders({
+     
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<ModelS>(`${this.createModel}`, data, { headers })
 
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
+  getModelSensor(token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.getModel}`, { headers });
   }
-  
-  getToken(): string | null {
-    return localStorage.getItem('token');
+
+  getSensors(token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.getSensor}`, { headers });
   }
-
-
-
- 
-
-  
 }
-

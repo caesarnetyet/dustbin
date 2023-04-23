@@ -55,10 +55,10 @@
 
        
         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#registerModelsModal">
-           <button class="btn btn-success" type="button" data-mdb-ripple-color="dark">Register Modal</button>
+           <button class="btn btn-success" type="button" data-mdb-ripple-color="dark">Register Model</button>
           </a>
           <form class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
-            <button class="btn btn-danger" type="button" data-mdb-ripple-color="dark">cerrar Sesion </button>
+            <button class="btn btn-danger" type="button" data-mdb-ripple-color="dark"  (click)="cerrarSession()">cerrar Sesion </button>
         </form>
         
 
@@ -66,16 +66,20 @@
 </nav>
 <div class="card-container">
     <div *ngFor="let sensor of items" class="card">
-      <img  alt="Imagen del carrito">
+     
       <div class="card-content">
-        <h1>Model Name</h1>
-        <h2>{{sensor.name}}</h2>
-        <h2>Price</h2>
-        <h3>${{sensor.price}}</h3>
-        <h2>Include Baterry</h2>
-        <h3>{{sensor.battery_included ? 'Yes' : 'No'}}</h3>
-
+        <h1>Model {{sensor.name}}</h1>
        
+        <h2>Price ${{sensor.price}}</h2>
+  
+        <h2>Include Baterry: {{sensor.battery_included ? 'Yes' : 'No'}}</h2>
+        <h3>Sensores</h3>
+        <ul *ngFor="let s of sensor.sensors">
+          <li >{{s.name}}</li>
+          
+        </ul>
+        
+
       </div>
     </div>
   </div>
@@ -110,9 +114,20 @@
                             </select>
                           </div>
                     </div>
+                    <div class="form-group">
+                      <label>Sensors:</label>
+                      <div *ngFor="let sensor of sensors" class="form-check">
+                        <input type="checkbox" id="{{sensor.id}}" name="{{sensor.name}}" [(ngModel)]="sensor.selected" [value]="sensor.id" class="form-check-input" [checked]="sensor.selected" (change)="onSensorSelectionChange()">
+                        <label for="{{sensor.id}}" class="form-check-label">{{sensor.name}}</label>
+                      </div>
+                      
+
                   </div>
+                  </div>
+
+                  
                   <br>
-                <button type="submit" class="btn btn-primary">Registrar carrito</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Registrar carrito</button>
               </form>
         </div>
     
