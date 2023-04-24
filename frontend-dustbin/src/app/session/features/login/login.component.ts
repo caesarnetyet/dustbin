@@ -25,8 +25,6 @@ export class LoginComponent {
   constructor(private authService: LoginService, private router: Router) {}
 
   onSubmit() {
-    console.log(this.email);
-    console.log(this.password);
     const form = {
       email: this.email,
       password: this.password,
@@ -35,11 +33,10 @@ export class LoginComponent {
 
     this.authService.login(form).subscribe(
       (res) => {
-        if (res.status === 400) {
-         console.log("error");
+        if (res.status == 400) {
+          alert('Usuario o contraseña incorrectos');
        
       } else {
-        console.log(res);
         localStorage.setItem('token', res.token);
         this.router.navigate(['/aMenu']);
       }

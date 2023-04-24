@@ -9,13 +9,12 @@ import { EmailComponent } from './session/features/email/email.component';
 import { NotFoundComponent } from './session/features/not-found/not-found.component';
 import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
 import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
-
+import { RoleGuard } from './guards/roles/role.guard';
 
 
 import { LoginGuard } from './guards/Login/login.guard';
 import { AuthGuard } from './guards/Usuario/usuario.guard';
 import { CardComponent } from './Admin/card/card.component';
-import { EditarComponent } from './Admin/editar/editar.component';
 
 
 const routes: Routes = [
@@ -23,7 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
   { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
 
-  { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard] },
+  { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard,RoleGuard] },
   { path: 'sMenu', component: MenuSensoresComponent,canActivate:[AuthGuard] },
   { path: 'cMenu', component: MenuClientsComponent,canActivate:[AuthGuard] },
   { path: 'dMenu', component: MenuDustbinsComponent,canActivate:[AuthGuard] },
@@ -31,7 +30,6 @@ const routes: Routes = [
 
   { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
   { path: 'email', component: EmailComponent,  },
-  { path: 'editar', component: EditarComponent,},
 
   { path:'notfound', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent },

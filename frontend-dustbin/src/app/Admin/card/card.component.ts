@@ -36,13 +36,11 @@ sensors!: any[];
 
     this.sensor.getModelSensor(token).subscribe(
       (res: sensoress[]) => {
-        console.log(res);
         this.items = res;
       }
     );
     this.sensor.getSensors(token).subscribe(
       (res: any) => {
-        console.log(res);
         this.sensors = res;
       }
     );
@@ -63,15 +61,12 @@ sensors!: any[];
       sensors: this.selectedSensorIds
       
     };
-    console.log(data);
 
     this.sensor.createModelSensor(data,token).subscribe(
       (res)=>
-      {
-        
-        console.log(res)
-       this.router.navigate(['/editar']);
+      {     
         this.ngOnInit();
+        window.location.reload();
       }
 
     )
@@ -79,7 +74,6 @@ sensors!: any[];
 
   onSensorSelectionChange() {
     this.selectedSensorIds = this.sensors.filter(sensor => sensor.selected).map(sensor => sensor.id);
-    console.log(this.selectedSensorIds);
   }
   
   cerrarSession(){
@@ -89,9 +83,7 @@ sensors!: any[];
   
   EliminarC( car:any ) {
     const id = car.id;
-    console.log(id);
     const token = localStorage.getItem('token') ?? '';
-    console.log(id);
     this.clientService.deleteCar(token,id).subscribe((res) => {
       alert("Se ha eliminado correctamente");
       this.ngOnInit();

@@ -16,6 +16,7 @@ export class LoginService {
   private _refresh$ = new Subject<void>();
   private registerUserUrl = API_URL + '/user';
   private loginUrl = API_URL + '/user/login';
+  private getUserUrl = API_URL + '/user';
   private logoutUrl = API_URL + '/user/logout';
   private createModel = API_URL + '/model/create';
   private getModel = API_URL +'/modelSensors/getAll'
@@ -49,15 +50,22 @@ export class LoginService {
     // Devuelve un observable con un mensaje de error
     return throwError('Algo salió mal; por favor inténtelo de nuevo más tarde.');
   }
-  login(login:Login): Observable<any> {
-    
-    return this.http.post(`${this.loginUrl}`, login)
+
+
+ login(login: Login): Observable<any> {
+  return this.http.post(`${this.loginUrl}`, login)
     .pipe(
       retry(3),
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          window.alert('Username or password incorrect.');
+        } else {
+          window.alert('An error occurred. Please try again later');
+        }
+        return throwError(error);
+      })
     );
-
-  };
+}
   
 
   logout() {
@@ -77,6 +85,16 @@ export class LoginService {
     return localStorage.getItem('token');
   }
 
+  getuser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get(`${this.getUserUrl}`, { headers })
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
 
 
  

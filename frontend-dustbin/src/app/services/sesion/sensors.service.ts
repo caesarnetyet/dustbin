@@ -39,11 +39,21 @@ export class SensorsService {
   }
   createModelSensor(data: any, token: any) {
     const headers = new HttpHeaders({
-     
       'Authorization': `Bearer ${token}`
     });
     return this.http.post<ModelS>(`${this.createModel}`, data, { headers })
-
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = '';
+          if (error.status === 422) {
+            errorMessage = 'The data provided is invalid. Please check your input and try again.';
+          } else {
+            errorMessage = 'An error occurred. Please try again later.';
+          }
+          window.alert(errorMessage);
+          return throwError(errorMessage);
+        })
+      );
   }
 
   getModelSensor(token: any): Observable<any> {

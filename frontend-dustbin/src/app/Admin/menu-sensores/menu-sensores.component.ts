@@ -29,20 +29,19 @@ export class MenuSensoresComponent {
   chart: any;
   chartData: any = {};
 
-  constructor(private socketService: SocketService, private elementRef: ElementRef, private auth:LoginService, private senosor:SensorsService
-    ,private modal: NgbModal) { }
- sensor: sensores[] = [];
+  constructor(private socketService: SocketService, private elementRef: ElementRef, private auth: LoginService, private senosor: SensorsService
+    , private modal: NgbModal) { }
+  sensor: sensores[] = [];
   ngOnInit() {
-     
+
     this.senosor.getSensors(localStorage.getItem('token')).subscribe(
       (res: sensores[]) => {
-        console.log(res);
         this.sensor = res;
 
-      
+
       }
     );
-    
+
   }
 
   createChart() {
@@ -77,51 +76,47 @@ export class MenuSensoresComponent {
           y: {
             beginAtZero: true
 
+          }
         }
       }
-    }
     });
   }
-   
-  cerrarSession(){
+
+  cerrarSession() {
     this.auth.logout();
-    
+
   }
 
- 
+
   submit() {
   }
   selectedSensor: any = null;
-id:number=0;
-name:string='';
-type:string='';
-description:string='';
-  EditarB(bike:any) {
-    this.id=bike.id;
-  this.modal.open(this.contenido);
-  this.selectedSensor = bike;
+  id: number = 0;
+  name: string = '';
+  type: string = '';
+  description: string = '';
+  EditarB(bike: any) {
+    this.id = bike.id;
+    this.modal.open(this.contenido);
+    this.selectedSensor = bike;
   }
-  abrirC()
-{
-  const id = this.id ?? 0;
-  console.log(id);
-  const bike = {
-    name: this.selectedSensor.name,
-    type: this.selectedSensor.type,
-    description: this.selectedSensor.description,
-  };
-  console.log(bike);
-  const token = localStorage.getItem('token') ?? '';
+  abrirC() {
+    const id = this.id ?? 0;
+    const dust = {
+      name: this.selectedSensor.name,
+      type: this.selectedSensor.type,
+      description: this.selectedSensor.description,
+    };
+    const token = localStorage.getItem('token') ?? '';
 
-  this.senosor.update(id,bike,token).subscribe(
-    (res) => {
-      console.log(res);
-      this.modal.dismissAll();
-      this.ngOnInit();
-    }
-  );
+    this.senosor.update(id, dust, token).subscribe(
+      (res) => {
+        this.modal.dismissAll();
+        this.ngOnInit();
+      }
+    );
 
-}
-  
+  }
+
 }
 

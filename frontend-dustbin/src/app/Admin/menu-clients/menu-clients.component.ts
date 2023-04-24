@@ -14,12 +14,9 @@ export class MenuClientsComponent {
   ngOnInit(): void {
     this.client.getAll( localStorage.getItem('token')).subscribe(  
       (res:User[]) => {
-        console.log(res);
         this.users = res;
       }
     );
-
-
   }
    
   cerrarSession(){
