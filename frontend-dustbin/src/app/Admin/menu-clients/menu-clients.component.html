@@ -70,30 +70,16 @@
                         <th scope="col">Name </th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th>Editar</th>
+                     
                     
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr *ngFor="let car of cars  ">
-                            <th scope="row">{{ car.id }}</th>
-                            <td>{{ car.brand }}</td>
-                            <td>{{ car.model }}</td>
-                            <td>{{ car.color }}</td>
-                            <td>{{ car.year }}</td> -->
                     <tr *ngFor="let u of users">
                         <th scope="row">{{u.id}}</th>
                         <td>{{u.name}}</td>
                         <td>{{u.email}}</td>
-                        <td>{{u.phone}}</td>
-                       
-
-
-
-                        <td><button type="button" class="btn btn-primary">Editar</button>
-                            <!-- <td><button type="button" class="btn btn-primary" (click)="EditarC(car)">Editar</button> -->
-                        </td>
-                    
+                        <td>{{u.phone}}</td>                
 
                 </tbody>
             </table>
@@ -104,37 +90,3 @@
     </div>
 </div>
 
-<!-- modal para actualizar datos  -->
-<ng-template #contenido let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Editar datos</h4>
-        <button class="close" type="button" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form>
-            <!-- <form (ngSubmit)="abrirC()" #form="ngForm"> -->
-            <!-- marca -->
-            <div class="form-outline mb-4">
-                <label for="form-label">Marca</label>
-                <!-- <input [(ngModel)]="brand" type="text" id="brand" name="brand" class="form-control" placeholder="Actualiza modelo" /> -->
-            </div>
-            <!-- modelo -->
-            <div class="form-outline mb-4">
-                <label for="form-label">Modelo</label>
-                <!-- <input  [(ngModel)]="model" type="text" id="model" name="model" class="form-control" placeholder="Actualiza marca" /> -->
-            </div>
-            <!-- color -->
-            <div class="form-outline mb-4">
-                <label for="form-label">Color</label>
-                <!-- <input [(ngModel)]="color" type="text" id="color"  name="color" class="form-control" placeholder="Actualiza color" /> -->
-            </div>
-            <!-- año -->
-            <div class="form-outline mb-4">
-                <label for="form-label">Año</label>
-                <!-- <input [(ngModel)]="year"  type="year" id="year" name="year" class="form-control" placeholder="Actualiza año" /> -->
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">actualizar</button>
-        </form>
-    </div>
