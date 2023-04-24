@@ -45,7 +45,7 @@ export default class UsersController {
     return { user, token, url: signedUrl }
   }
 
-  public async activate({ params, response, request }: HttpContextContract) {
+  public async activate({ params, response, request, auth }: HttpContextContract) {
     if (!request.hasValidSignature()) {
       return response.badRequest({ message: 'Invalid or expired url' })
     }
@@ -56,7 +56,9 @@ export default class UsersController {
     }
     user.is_active = true
     await user.save()
-    return response.ok({ message: 'Cuenta activada satistactoriamente' })
+
+    const { token } = await auth.use('api').generate(user)
+    return response.ok({ message: 'Cuenta activada satistactoriamente', token })
   }
 
   public async login({ request, auth }: HttpContextContract) {

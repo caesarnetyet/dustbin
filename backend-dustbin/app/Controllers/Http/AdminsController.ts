@@ -35,13 +35,13 @@ export default class AdminsController {
 
   public async updateUser({ request }: HttpContextContract) {
     const updateUserSchema = schema.create({
-      name: schema.string(),
-      email: schema.string({}, [
+      name: schema.string.optional(),
+      email: schema.string.optional({}, [
         rules.email(),
         rules.unique({ table: 'users', column: 'email' }),
       ]),
-      password: schema.string(),
-      phone: schema.string(),
+      password: schema.string.optional(),
+      phone: schema.string.optional(),
     })
     const payload = await request.validate({ schema: updateUserSchema })
     if (!payload) {
@@ -51,10 +51,11 @@ export default class AdminsController {
     if (!findUser) {
       return { message: 'No se encontró el usuario' }
     }
-    findUser.name = payload.name
-    findUser.email = payload.email
-    findUser.password = payload.password
-    findUser.phone = payload.phone
+    
+    findUser.name = payload.name!
+    findUser.email = payload.email!
+    findUser.password = payload.password!
+    findUser.phone = payload.phone!
     await findUser.save()
     return findUser
   }
