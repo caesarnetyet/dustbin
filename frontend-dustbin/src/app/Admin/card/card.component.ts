@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/sesion/login.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SensorsService } from 'src/app/services/sesion/sensors.service';
+import { ClientService } from 'src/app/services/sesion/client.service';
+
 
 interface sensoress {
   id?: number;
@@ -20,7 +22,7 @@ interface sensoress {
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-constructor(private authService: LoginService,private modalService: NgbModal, private sensor:SensorsService){
+constructor(private authService: LoginService,private modalService: NgbModal, private sensor:SensorsService,  private clientService: ClientService){
 
 }
 
@@ -80,6 +82,30 @@ sensors!: any[];
     this.authService.logout();
     
   }
+  
+  EliminarC( car:any ) {
+    const id = car.id;
+    const token = localStorage.getItem('token') ?? '';
+    console.log(id);
+    this.clientService.deleteCar(token,id).subscribe((res) => {
+      alert("Se ha eliminado correctamente");
+      this.ngOnInit();
+    },
+    (err) => {
+      if (err == 500)
+      {
+        alert("Nos encontramos en mantenimiento");
+      }
+      if (err == 400)
+      {
+        alert("No se ha podido eliminar");
+      }
+    }
+    
+    );
+    
+    
+    }
   }
 
 
