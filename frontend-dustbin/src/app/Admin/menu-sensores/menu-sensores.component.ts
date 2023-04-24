@@ -87,39 +87,27 @@ export class MenuSensoresComponent {
     
   }
 
-
-  // Método para escuchar los datos del servidor de socket
-  listenForChartData() {
-   /* this.socketService.getChartData().subscribe((data: any) => {
-      this.chartData = data;
-      this.updateChart();
-    });*/
-  }
-
-  // Método para actualizar el gráfico con los nuevos datos
-  updateChart() {
-    const labels = Object.keys(this.chartData);
-    const data = labels.map((label: any) => this.chartData[label]);
-    this.chart.data.labels = labels;
-    this.chart.data.datasets[0].data = data;
-    this.chart.update();
-  }
   name: string = '';
   type: string = '';
   description: string = '';
-  Update(sens:sensores)
-  {
-    const data = {
-      name: sens.name,
-      type: sens.type,
-      description: sens.description,
-    }
-    console.log(sens.id);
+  guardar(Sensor:any){
+    this.modalContent.open();
+    console.log(Sensor);
+    this.senosor.update(Sensor,localStorage.getItem('token'),this.id).subscribe(
+      (res: sensores[]) => {
+        console.log(res);
+        this.sensor = res;
 
+      
+      }
+    );
+  }
+  submit() {
   }
 
-
+  id: number = 0;
   open(content:any) {
+    this.id=content.id;
     console.log(content);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       // modal closed
