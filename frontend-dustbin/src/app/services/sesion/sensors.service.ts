@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ModelS } from 'src/app/models/modelS.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, tap } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { API_URL } from 'src/app/env';
 import { Router } from '@angular/router';
@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class SensorsService {
   private _refresh$ = new Subject<void>();
   private createModel = API_URL + '/model/create';
-  private getModel = API_URL +'/modelSensors/getAll'
-  private getSensor = API_URL + '/sensor/getAll'
+  private getModel = API_URL +'/modelSensors/getAll';
+  private getSensor = API_URL + '/sensor/getAll';
   
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -58,5 +58,16 @@ export class SensorsService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.getSensor}`, { headers });
+  }
+  update(id:number,sensor:any ,token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+
+    });
+    return this.http.put<any>( `${API_URL}/sensor/update/${id}`, sensor, { headers })
+      .pipe(catchError(this.handleError))
+      .pipe(tap(() => {
+        this._refresh$.next();
+      }));
   }
 }
