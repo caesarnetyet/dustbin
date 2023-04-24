@@ -116,7 +116,7 @@
 
 <ng-template #contenido let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Editar datos</h4>
+        <h4 class="modal-title">Edit</h4>
         <button class="close" type="button" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -125,21 +125,21 @@
         <form  (ngSubmit)="abrirC()" #form="ngForm">
             <!-- marca -->
             <div class="form-outline mb-4">
-                <label for="form-label">Marca</label>
-                <input [(ngModel)]="name" type="text" id="brand" name="brand" class="form-control" placeholder="Actualiza modelo" />
+                <label for="form-label">Sensor Name</label>
+                <input [(ngModel)]="name" type="text" id="brand" name="brand" class="form-control" placeholder="Update Name" required />
             </div>
             <!-- modelo -->
             <div class="form-outline mb-4">
-                <label for="form-label">Modelo</label>
-                <input  [(ngModel)]="type" type="text" id="model" name="model" class="form-control" placeholder="Actualiza marca" />
+                <label for="form-label">Type</label>
+                <input  [(ngModel)]="type" type="text" id="model" name="model" class="form-control" placeholder="Update Type" required />
             </div>
             <!-- color -->
             <div class="form-outline mb-4">
-                <label for="form-label">Color</label>
-                <input [(ngModel)]="description" type="text" id="color"  name="color" class="form-control" placeholder="Actualiza color" />
+                <label for="form-label">Description</label>
+                <input [(ngModel)]="description" type="text" id="color"  name="color" class="form-control" placeholder="Update Description "  required/>
             </div>
           
-            <button type="submit" class="btn btn-primary btn-block">actualizar</button>
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
 
         </form>
     </div>
