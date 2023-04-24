@@ -14,7 +14,7 @@ export class SocketService implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.socket.on('connect', () => {
+    this.socket.on('Inclinacion', () => {
       console.log(this.socket.id);
     });
   }

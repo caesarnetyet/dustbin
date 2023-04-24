@@ -37,16 +37,16 @@ Route.group(() => {
 Route.group(() => {
   Route.post('/create', 'SensorsController.saveSensor').middleware('auth')
   Route.get('/getAll', 'SensorsController.getSensors').middleware('auth')
-  Route.put('/update/:id', 'SensorsController.updateSensor').middleware('auth')
-  Route.delete('/delete/:id', 'SensorsController.deleteSensor').middleware('auth')
+  Route.put('/update/:id', 'SensorsController.updateSensor').middleware('auth').where('id', '[0-9]+')
+  Route.delete('/delete/:id', 'SensorsController.deleteSensor').middleware('auth').where('id', '[0-9]+')
 }).prefix('sensor')
 
 Route.group(() => {
   Route.post('/create', 'AdminsController.createUser').middleware('auth')
   Route.get('/getAll', 'AdminsController.getUsers').middleware('auth')
   Route.get('/getDustbins', 'UsersController.getDustbins').middleware('auth')
-  Route.put('/update/:id', 'AdminsController.updateUser').middleware('auth')
-  Route.delete('/delete/:id', 'AdminsController.deleteUser').middleware('auth')
+  Route.put('/update/:id', 'AdminsController.updateUser').middleware('auth').where('id', '[0-9]+')
+  Route.delete('/delete/:id', 'AdminsController.deleteUser').middleware('auth').where('id', '[0-9]+')
 }).prefix('user')
 
 Route.group(() => {
@@ -55,23 +55,23 @@ Route.group(() => {
 
   Route.get('/getModelSensor', 'ModelController.getModelSensors').middleware('auth')
   Route.get('/getModelSensor/:id', 'ModelController.getModelSensors').middleware('auth')
-  Route.put('/update/:id', 'ModelController.updateModel').middleware('auth')
-  Route.delete('/delete/:id', 'ModelController.deleteModel').middleware('auth')
+  Route.put('/update/:id', 'ModelController.updateModel').middleware('auth').where('id', '[0-9]+')
+  Route.delete('/delete/:id', 'ModelController.deleteModel').middleware('auth').where('id', '[0-9]+')
 }).prefix('model')
 
 Route.group(() => {
   Route.post('/create', 'DustbinController.createDustbin').middleware('auth')
   Route.get('/getAll', 'DustbinController.getDustbins').middleware('auth')
-  Route.put('/update/:id', 'DustbinController.updateDustbin').middleware('auth')
-  Route.delete('/delete/:id', 'DustbinController.deleteDustbin').middleware('auth')
+  Route.put('/update/:id', 'DustbinController.updateDustbin').middleware('auth').where('id', '[0-9]+')
+  Route.delete('/delete/:id', 'DustbinController.deleteDustbin').middleware('auth').where('id', '[0-9]+')
 }).prefix('dustbin')
 
 
 Route.group(() => {
   Route.post('/create', 'ModelSensorController.createModelSensor').middleware('auth')
   Route.get('/getAll', 'ModelSensorController.getModelSensors').middleware('auth')
-  Route.put('/update/:id', 'ModelSensorController.updateModelSensor').middleware('auth')
-  Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor').middleware('auth')
+  Route.put('/update/:id', 'ModelSensorController.updateModelSensor').middleware('auth').where('id', '[0-9]+')
+  Route.delete('/delete/:id', 'ModelSensorController.deleteModelSensor').middleware('auth').where('id', '[0-9]+')
 }).prefix('modelSensors')
 
 Route.get('/mongo/sensors', 'MongoController.getSensors')
