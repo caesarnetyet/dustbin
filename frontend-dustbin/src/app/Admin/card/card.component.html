@@ -86,6 +86,7 @@
 </div>
 
 <!-- modal para registrar -->
+<div class="d-flex justify-content-center">
   <div class="modal fade" id="registerModelsModal" tabindex="-1" aria-labelledby="registerModelsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -94,46 +95,69 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form #carritoForm="ngForm" (ngSubmit)="submitForm(carritoForm)" class="my-4 p-3 border form-style">
-                <div class="form-group">
-                  <label for="nombre">Dustbin Name:</label>
-                  <input type="text" id="name" name="name" ngModel required class="form-control">
-                </div>
-              
-                <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input type="number" id="price" name="price" ngModel required class="form-control">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <div class="btn-group" role="group">
-                        <div class="form-group">
-                            <label for="battery_included">Battery included:</label>
-                            <select id="battery_included" name="battery_included" [(ngModel)]="batteryIncluded" class="form-control">
-                              <option value="true">Yes</option>
-                              <option value="false">No</option>
-                            </select>
-                          </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Sensors:</label>
-                      <div *ngFor="let sensor of sensors" class="form-check">
-                        <input type="checkbox" id="{{sensor.id}}" name="{{sensor.name}}" [(ngModel)]="sensor.selected" [value]="sensor.id" class="form-check-input" [checked]="sensor.selected" (change)="onSensorSelectionChange()">
-                        <label for="{{sensor.id}}" class="form-check-label">{{sensor.name}}</label>
-                      </div>
-                      
-
-                  </div>
-                  </div>
-
-                  
-                  <br>
-                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Registrar carrito</button>
-              </form>
+          <form #carritoForm="ngForm" (ngSubmit)="submitForm(carritoForm)" class="my-4 p-3 border form-style">
+            <div class="form-group">
+              <label for="nombre">Dustbin Name:</label>
+              <input type="text" id="name" name="name" ngModel required class="form-control">
+            </div>
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" ngModel required class="form-control">
         </div>
-    
-      </div>
+        <br>
+        <div class="form-group">
+          <div class="btn-group" role="group">
+            <div class="form-group">
+              <label for="battery_included">Battery included:</label>
+              <select id="battery_included" name="battery_included" [(ngModel)]="batteryIncluded" class="form-control">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Sensors:</label>
+            <div *ngFor="let sensor of sensors" class="form-check">
+              <input type="checkbox" id="{{sensor.id}}" name="{{sensor.name}}" [(ngModel)]="sensor.selected" [value]="sensor.id" class="form-check-input" [checked]="sensor.selected" (change)="onSensorSelectionChange()">
+              <label for="{{sensor.id}}" class="form-check-label">{{sensor.name}}</label>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <br>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Registrar carrito</button>
+      </form>
     </div>
+
+  </div>
+</div>
+  </div>
+</div>
+<!-- fin del modal -->
+
+
+  <!-- modal para eliminar datos -->
+<ng-template #eliminar let-modal>
+
+  <div class="modal-content text-center mb-">
+
+      <div class="modal-header x d-flex justify-content-center">
+          <h1 class="heading" id="color-h3">estas seguro?</h1>
+      </div>
+
+      <div class="modal-body">
+          <h3>esta accion no se podra deshacer</h3>
+      </div>
+
+      <div class="modal-footer flex-center">
+          <a href="" class="btn  btn-outline-danger">Yes</a>
+          <a type="button" class="btn  btn-danger waves-effect" (click)="modal.close()">No</a>
+      </div>
   </div>
 
+</ng-template>
+<!-- fin del modal -->
   
