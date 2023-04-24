@@ -70,7 +70,7 @@
                         <th scope="col">Name </th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                     
+                        <th colspan="2">Actions</th>
                     
                     </tr>
                 </thead>
@@ -80,7 +80,8 @@
                         <td>{{u.name}}</td>
                         <td>{{u.email}}</td>
                         <td>{{u.phone}}</td>                
-
+                        <td><button class="btn btn-primary rounded-0" (click)="editUser(u)">Editar</button></td>
+                        
                 </tbody>
             </table>
         </div>
@@ -90,3 +91,40 @@
     </div>
 </div>
 
+
+
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Edit</h4>
+      <button class="close" type="button" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="abrirC()" #form="ngForm">
+        <!-- marca -->
+        <div class="form-outline mb-4">
+          <label for="form-label"> Name</label>
+          <input [(ngModel)]="selectedUser.name" type="text" id="name" name="name" class="form-control" placeholder="Update Name" required />
+        </div>
+        <!-- modelo -->
+        <div class="form-outline mb-4">
+          <label for="form-label">Email</label>
+          <input [(ngModel)]="selectedUser.email" type="text" id="email" name="email" class="form-control" placeholder="Update " required />
+        </div>
+        <!-- color -->
+        <div class="form-outline mb-4">
+          <label for="form-label">Active</label>
+          <select class="form-control" name="is_active" [(ngModel)]="selectedUser.is_active" >
+            <option value="{{1}}">Active</option>
+            <option value="{{0}}">Inactive</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Update</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  

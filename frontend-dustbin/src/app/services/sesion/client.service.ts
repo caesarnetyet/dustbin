@@ -4,6 +4,8 @@ import { catchError, Observable, retry, Subject, tap, throwError  } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ModelS } from 'src/app/models/modelS.interface';
+import { User } from 'src/app/models/usuario.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,15 @@ export class ClientService {
     return throwError('Algo salió mal; por favor inténtelo de nuevo más tarde.');
   }
 
+
+  editUser( token:string,user:Partial<User>): Observable<User> {
+    const headers = new HttpHeaders({
+     
+      'Authorization': `Bearer ${token}`
+    });
+    
+    return this.http.put<User>(`${this.API_URL}/user/update/${user.id}`,user,{headers})
+  }
 
   getAll(token:any): Observable<any> {
     const headers = new HttpHeaders({

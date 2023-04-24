@@ -19,8 +19,8 @@ import { CardComponent } from './Admin/card/card.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
-  { path: 'register', component: RegisterComponent,canActivate:[LoginGuard] },
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent },
 
   { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard,RoleGuard] },
   { path: 'sMenu', component: MenuSensoresComponent,canActivate:[AuthGuard] },
