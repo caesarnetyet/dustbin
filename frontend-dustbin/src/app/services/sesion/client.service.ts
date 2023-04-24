@@ -17,6 +17,20 @@ export class ClientService {
   get_refresh$() {
     return this._refresh$;
   }
+  private handleError(error: HttpErrorResponse) {
+    console.log(error); // Agregado para imprimir el error en la consola
+    if (error.error instanceof ErrorEvent) {
+      // Error del cliente
+      console.error('Ocurrió un error:', error.error.message);
+    } else {
+      // Error del servidor
+      console.error(
+        `El servidor retornó el código ${error.status}, ` +
+        `el error retornado fue: ${error.error.message}`);
+    }
+    // Devuelve un observable con un mensaje de error
+    return throwError('Algo salió mal; por favor inténtelo de nuevo más tarde.');
+  }
 
 
   getAll(token:any): Observable<any> {
@@ -31,7 +45,7 @@ export class ClientService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.delete<ModelS>(`${this.API_URL}/cars/${id}`, { headers })
+    return this.http.delete<ModelS>(`${this.API_URL}/model/delete/${id}`, { headers })
       .pipe(retry(3), catchError(this.handleError));
   }
 }

@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+    <hr>
+    <label id="icon" for="name"><i class="fas fa-motorcycle icon"></i></label>
+    <input type="text" name="name" id="name" placeholder="name" required [(ngModel)]="name" />
+    
+    <label id="icon" for="name"><i class="fas fa-motorcycle icon"></i></label>
+    <input type="text" name="description" id="description" placeholder="Model" required [(ngModel)]="description" />    
+  
+    <label  id="icon" for="name"><i class="fas fa-paint-roller icon"></i></label>
+    <input type="text" name="type" id="type" placeholder="type" required [(ngModel)]="type" />
+
+    
+    <hr>
+  
+    <button type="submit" class="button">Register</button>
+  </form>

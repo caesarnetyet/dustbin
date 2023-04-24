@@ -15,6 +15,7 @@ import { NotFoundComponent } from './session/features/not-found/not-found.compon
 import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.component';
 import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
 import { CardComponent } from './Admin/card/card.component';
+import { EditarComponent } from './Admin/editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CardComponent } from './Admin/card/card.component';
     NotFoundComponent,
     MenuClientsComponent,
     MenuDustbinsComponent,
-    CardComponent
+    CardComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,

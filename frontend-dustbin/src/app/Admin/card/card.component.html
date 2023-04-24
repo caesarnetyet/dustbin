@@ -77,13 +77,11 @@
     <div class="descr">Price: ${{sensor.price}}</div>
     <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
     <div class="descr"  *ngFor="let s of sensor.sensors">Sensors:{{s.name}} </div>
-    <button type="button" class="btn btn-danger" (click)="EliminarC(sensors)">Eliminar</button>
+    <button type="button" class="btn btn-danger" (click)="EliminarC(sensor)">Eliminar</button>
   </li>
 </ol>
 
-<div class="credits">
-  <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">Inspired by</a>
-</div>
+
 
 <!-- modal para registrar -->
   <div class="modal fade" id="registerModelsModal" tabindex="-1" aria-labelledby="registerModelsModalLabel" aria-hidden="true">

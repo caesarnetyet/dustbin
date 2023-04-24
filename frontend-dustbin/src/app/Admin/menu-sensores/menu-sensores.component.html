@@ -95,10 +95,11 @@
             <td>{{s.name}}</td>
             <td>{{s.type}}</td>
             <td>{{s.description}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="EditarB(s)">Editar</button></td>
 
 
             <!-- <td><button type="button" class="btn btn-primary">Editar</button> -->
-              <td><button type="button" class="btn btn-primary"  (click)="guardar(contenido)">Edit</button>
+              <!-- <td><button type="button" class="btn btn-primary"  (click)="guardar(contenido)">Edit</button> -->
             <!-- </td> -->
            
 
@@ -112,34 +113,36 @@
   </div>
 </div>
 
-<!-- modal para actualizar datos  -->
+
 <ng-template #contenido let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Edit</h4>
-    <button class="close" type="button" (click)="modal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form (click)="submit()" #form="ngForm">
-      <!-- <form (ngSubmit)="abrirC()" #form="ngForm"> -->
-      <!-- marca -->
-      <div class="form-outline mb-4">
-        <label for="form-label">Sensor Name</label>
-        <input [(ngModel)]="name" type="text" id="name" name="name" class="form-control" placeholder="Update Sensor Name" />
-      </div>
-      <!-- modelo -->
-      <div class="form-outline mb-4">
-        <label for="form-label">Type Sensor</label>
-        <input  [(ngModel)]="type" type="text" id="type" name="type" class="form-control" placeholder="Update Sensor Type" />
-      </div>
-      <!-- color -->
-      <div class="form-outline mb-4">
-        <label for="form-label">Description</label>
-        <input [(ngModel)]="description" type="text" id="description"  name="description" class="form-control" placeholder="Update Description" />
-      </div>
-      <!-- año -->
-      
-      <button type="submit" class="btn btn-primary btn-block">actualizar</button>
-    </form>
-  </div>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar datos</h4>
+        <button class="close" type="button" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form  (ngSubmit)="abrirC()" #form="ngForm">
+            <!-- marca -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Marca</label>
+                <input [(ngModel)]="name" type="text" id="brand" name="brand" class="form-control" placeholder="Actualiza modelo" />
+            </div>
+            <!-- modelo -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Modelo</label>
+                <input  [(ngModel)]="type" type="text" id="model" name="model" class="form-control" placeholder="Actualiza marca" />
+            </div>
+            <!-- color -->
+            <div class="form-outline mb-4">
+                <label for="form-label">Color</label>
+                <input [(ngModel)]="description" type="text" id="color"  name="color" class="form-control" placeholder="Actualiza color" />
+            </div>
+          
+            <button type="submit" class="btn btn-primary btn-block">actualizar</button>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>

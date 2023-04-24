@@ -85,6 +85,7 @@ sensors!: any[];
   
   EliminarC( car:any ) {
     const id = car.id;
+    console.log(id);
     const token = localStorage.getItem('token') ?? '';
     console.log(id);
     this.clientService.deleteCar(token,id).subscribe((res) => {

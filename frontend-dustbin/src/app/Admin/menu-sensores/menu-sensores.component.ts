@@ -21,7 +21,8 @@ interface sensores {
 
 })
 export class MenuSensoresComponent {
-  @ViewChild('contenido') modalContent:any;
+  @ViewChild('contenido') contenido: any;
+
 
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
 
@@ -29,7 +30,7 @@ export class MenuSensoresComponent {
   chartData: any = {};
 
   constructor(private socketService: SocketService, private elementRef: ElementRef, private auth:LoginService, private senosor:SensorsService
-    ,private modalService: NgbModal) { }
+    ,private modal: NgbModal) { }
  sensor: sensores[] = [];
   ngOnInit() {
      
@@ -87,33 +88,38 @@ export class MenuSensoresComponent {
     
   }
 
-  name: string = '';
-  type: string = '';
-  description: string = '';
-  guardar(Sensor:any){
-    this.modalContent.open();
-    console.log(Sensor);
-    this.senosor.update(Sensor,localStorage.getItem('token'),this.id).subscribe(
-      (res: sensores[]) => {
-        console.log(res);
-        this.sensor = res;
-
-      
-      }
-    );
-  }
+ 
   submit() {
   }
-
-  id: number = 0;
-  open(content:any) {
-    this.id=content.id;
-    console.log(content);
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      // modal closed
-    }, (reason) => {
-      // modal dismissed
-    });
+id:number=0;
+name:string='';
+type:string='';
+description:string='';
+  EditarB(bike:any) {
+    this.id=bike.id;
+  this.modal.open(this.contenido);
   }
+  abrirC()
+{
+  const id = this.id ?? 0;
+  console.log(id);
+  const bike = {
+    name: this.name,
+    type: this.type,
+    description: this.description,
+  };
+  console.log(bike);
+  const token = localStorage.getItem('token') ?? '';
+
+  this.senosor.update(id,bike,token).subscribe(
+    (res) => {
+      console.log(res);
+      this.modal.dismissAll();
+      this.ngOnInit();
+    }
+  );
+
+}
   
 }
+
