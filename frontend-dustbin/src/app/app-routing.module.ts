@@ -15,6 +15,7 @@ import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.compo
 import { LoginGuard } from './guards/Login/login.guard';
 import { AuthGuard } from './guards/Usuario/usuario.guard';
 import { CardComponent } from './Admin/card/card.component';
+import { EditarComponent } from './Admin/editar/editar.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 
   { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
   { path: 'email', component: EmailComponent,  },
+  { path: 'editar', component: EditarComponent,},
 
   { path:'notfound', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent },

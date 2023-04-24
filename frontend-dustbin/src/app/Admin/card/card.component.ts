@@ -4,7 +4,9 @@ import { LoginService } from 'src/app/services/sesion/login.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SensorsService } from 'src/app/services/sesion/sensors.service';
 import { ClientService } from 'src/app/services/sesion/client.service';
-
+import { Router, RouterLink } from '@angular/router';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 interface sensoress {
   id?: number;
@@ -22,7 +24,7 @@ interface sensoress {
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-constructor(private authService: LoginService,private modalService: NgbModal, private sensor:SensorsService,  private clientService: ClientService){
+constructor(private authService: LoginService,private modalService: NgbModal, private sensor:SensorsService,  private clientService: ClientService, private router:Router){
 
 }
 
@@ -66,7 +68,9 @@ sensors!: any[];
     this.sensor.createModelSensor(data,token).subscribe(
       (res)=>
       {
+        
         console.log(res)
+       this.router.navigate(['/editar']);
         this.ngOnInit();
       }
 

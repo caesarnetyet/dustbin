@@ -91,6 +91,7 @@ export class MenuSensoresComponent {
  
   submit() {
   }
+  selectedSensor: any = null;
 id:number=0;
 name:string='';
 type:string='';
@@ -98,15 +99,16 @@ description:string='';
   EditarB(bike:any) {
     this.id=bike.id;
   this.modal.open(this.contenido);
+  this.selectedSensor = bike;
   }
   abrirC()
 {
   const id = this.id ?? 0;
   console.log(id);
   const bike = {
-    name: this.name,
-    type: this.type,
-    description: this.description,
+    name: this.selectedSensor.name,
+    type: this.selectedSensor.type,
+    description: this.selectedSensor.description,
   };
   console.log(bike);
   const token = localStorage.getItem('token') ?? '';

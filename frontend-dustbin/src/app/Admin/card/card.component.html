@@ -65,36 +65,15 @@
     </div>
 </nav>
 
-
-
-<!-- cards -->
-
-<h1>Dustbin Models</h1>
-<ol>
-  <li *ngFor="let sensor of items">
-    <div class="icon"><i class="fas fa-truck"></i></div>
-    <div class="title">{{sensor.name}}</div>
-    <div class="descr">Price: ${{sensor.price}}</div>
-    <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
-    <div class="descr"  *ngFor="let s of sensor.sensors">Sensors:{{s.name}} </div>
-    <button type="button" class="btn btn-danger" (click)="EliminarC(sensors)">Eliminar</button>
-  </li>
-</ol>
-
-<div class="credits">
-  <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">Inspired by</a>
-</div>
-
-<!-- modal para registrar -->
-
 <div class="modal fade" id="registerModelsModal" tabindex="-1" aria-labelledby="registerModelsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="registerModelsModalLabel">Register Models</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        
         <form #carritoForm="ngForm" (ngSubmit)="submitForm(carritoForm)" class="my-4 p-3 border form-style">
           <div class="form-group">
             <label for="nombre">Dustbin Name:</label>
@@ -136,12 +115,32 @@
     </div>
   </div>
 </div>
+<app-editar></app-editar>
+
+<!-- cards -->
+<!-- 
+<h1>Dustbin Models</h1>
+<ol>
+  <li *ngFor="let sensor of items">
+    <div class="icon"><i class="fas fa-truck"></i></div>
+    <div class="title">{{sensor.name}}</div>
+    <div class="descr">Price: ${{sensor.price}}</div>
+    <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
+    <div class="descr"  *ngFor="let s of sensor.sensors">Sensors:{{s.name}} </div>
+    <button type="button" class="btn btn-danger" (click)="EliminarC(sensors)">Eliminar</button>
+  </li>
+</ol> -->
+
+
+<!-- modal para registrar -->
+
+
 
 <!-- fin del modal -->
 
 
   <!-- modal para eliminar datos -->
-<ng-template #eliminar let-modal>
+<!-- <ng-template #eliminar let-modal>
 
   <div class="modal-content text-center mb-">
 
@@ -159,6 +158,6 @@
       </div>
   </div>
 
-</ng-template>
+</ng-template> -->
 <!-- fin del modal -->
   

@@ -1,16 +1,32 @@
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-    <hr>
-    <label id="icon" for="name"><i class="fas fa-motorcycle icon"></i></label>
-    <input type="text" name="name" id="name" placeholder="name" required [(ngModel)]="name" />
-    
-    <label id="icon" for="name"><i class="fas fa-motorcycle icon"></i></label>
-    <input type="text" name="description" id="description" placeholder="Model" required [(ngModel)]="description" />    
-  
-    <label  id="icon" for="name"><i class="fas fa-paint-roller icon"></i></label>
-    <input type="text" name="type" id="type" placeholder="type" required [(ngModel)]="type" />
 
-    
-    <hr>
+<h1>Dustbin Models</h1>
+<ol>
+  <li *ngFor="let sensor of items">
+    <div class="icon"><i class="fas fa-truck"></i></div>
+    <div class="title">{{sensor.name}}</div>
+    <div class="descr">Price: ${{sensor.price}}</div>
+    <div class="descr">Include Battery: {{sensor.battery_included ? 'Yes' : 'No'}}</div>
+    <div class="descr"  *ngFor="let s of sensor.sensors">Sensors:{{s.name}} </div>
+    <button type="button" class="btn btn-danger" (click)="EliminarC(sensor)">Eliminar</button>
+  </li>
+</ol>
+
+<ng-template #eliminar let-modal>
+
+    <div class="modal-content text-center mb-">
   
-    <button type="submit" class="button">Register</button>
-  </form>
+        <div class="modal-header x d-flex justify-content-center">
+            <h1 class="heading" id="color-h3">estas seguro?</h1>
+        </div>
+  
+        <div class="modal-body">
+            <h3>esta accion no se podra deshacer</h3>
+        </div>
+  
+        <div class="modal-footer flex-center">
+            <a href="" class="btn  btn-outline-danger">Yes</a>
+            <a type="button" class="btn  btn-danger waves-effect" (click)="modal.close()">No</a>
+        </div>
+    </div>
+  
+  </ng-template>
