@@ -59,7 +59,8 @@ export class SensorsService {
     });
     return this.http.get(`${this.getSensor}`, { headers });
   }
-  update(id:number,sensor:any ,token:string): Observable<any> {
+  
+  update(id:number,sensor:any ,token:any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
 
