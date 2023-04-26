@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LoginComponent } from './session/features/login/login.component';
 import { RegisterComponent } from './session/features/register/register.component';
 import { MenuComponent } from './session/features/menu/menu.component';
@@ -16,6 +17,7 @@ import { MenuClientsComponent } from './Admin/menu-clients/menu-clients.componen
 import { MenuDustbinsComponent } from './Admin/menu-dustbins/menu-dustbins.component';
 import { CardComponent } from './Admin/card/card.component';
 import { EditarComponent } from './Admin/editar/editar.component';
+import { JoystickComponent } from './components/ws/joystick/joystick.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { EditarComponent } from './Admin/editar/editar.component';
     MenuClientsComponent,
     MenuDustbinsComponent,
     CardComponent,
-    EditarComponent
+    EditarComponent,
+    JoystickComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { EditarComponent } from './Admin/editar/editar.component';
     NgbModule,
     AppRoutingModule,
     HttpClientModule,
+    DragDropModule,
     FormsModule,
     ReactiveFormsModule
   ],

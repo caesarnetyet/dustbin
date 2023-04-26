@@ -15,23 +15,24 @@ import { RoleGuard } from './guards/roles/role.guard';
 import { LoginGuard } from './guards/Login/login.guard';
 import { AuthGuard } from './guards/Usuario/usuario.guard';
 import { CardComponent } from './Admin/card/card.component';
+import { JoystickComponent } from './components/ws/joystick/joystick.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  { path: 'aMenu', component: MenuAdminComponent,canActivate:[AuthGuard,RoleGuard] },
-  { path: 'sMenu', component: MenuSensoresComponent,canActivate:[AuthGuard] },
-  { path: 'cMenu', component: MenuClientsComponent,canActivate:[AuthGuard] },
-  { path: 'dMenu', component: MenuDustbinsComponent,canActivate:[AuthGuard] },
-  { path:'menuS',component:CardComponent, canActivate:[AuthGuard]},
+  { path: 'aMenu', component: MenuAdminComponent, canActivate: [AuthGuard, RoleGuard] },
+  { path: 'sMenu', component: MenuSensoresComponent, canActivate: [AuthGuard] },
+  { path: 'cMenu', component: MenuClientsComponent, canActivate: [AuthGuard] },
+  { path: 'dMenu', component: MenuDustbinsComponent, canActivate: [AuthGuard] },
+  { path: 'menuS', component: CardComponent, canActivate: [AuthGuard] },
 
-  { path: 'menu', component: MenuComponent,canActivate:[AuthGuard] },
-  { path: 'email', component: EmailComponent,  },
-
-  { path:'notfound', component: NotFoundComponent },
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: 'email', component: EmailComponent, },
+  { path: 'joystick', component: JoystickComponent },
+  { path: 'notfound', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent },
 
 ];
